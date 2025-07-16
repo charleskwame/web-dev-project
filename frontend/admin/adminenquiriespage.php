@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./adminenquiriespage.css">
+    <link rel="stylesheet" href="./adminenquiriespage.css?v= <?php echo date('his'); ?>">
     <title>Admin Enquiries Dashboard</title>
 </head>
 
