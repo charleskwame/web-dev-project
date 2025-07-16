@@ -1,1 +1,22 @@
+:root {
+	--mainblue: #14248a;
+	--secondaryyellow: #e0ca3c;
+	--fontblack: #28262c;
+	--backgroundwhite: #f9f5ff;
+	--fontwhite: #f9f5ff;
+}
 
+/* Reset all default HTML styles */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+html,
+body {
+	height: 100%;
+}
