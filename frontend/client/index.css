@@ -1,1 +1,123 @@
+:root {
+	--mainblue: #14248a;
+	--secondaryyellow: #e0ca3c;
+	--fontblack: #28262c;
+	--backgroundwhite: #f9f5ff;
+	--fontwhite: #f9f5ff;
+}
 
+/* Reset all default HTML styles */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	padding: 10px;
+	background-image: url("../assets/images/backgroundimage.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+nav > img {
+	width: 2rem;
+}
+
+nav > a > button {
+	padding: 10px 10px;
+	font-weight: bold;
+	border: 1px solid var(--backgroundwhite);
+	cursor: pointer;
+	background-color: var(--mainblue);
+	color: var(--fontwhite);
+	border-radius: 0.3rem;
+}
+
+nav > a > button:hover {
+	background-color: var(--backgroundwhite);
+	color: var(--mainblue);
+	border: 1px solid var(--mainblue);
+}
+
+main {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 90%;
+	display: grid;
+	gap: 10px;
+}
+
+h1 {
+	color: var(--fontwhite);
+	text-align: center;
+	font-size: 2rem;
+}
+
+main > div > a > button {
+	padding: 10px 10px;
+	font-weight: bold;
+	border: 1px solid var(--backgroundwhite);
+	cursor: pointer;
+	background-color: var(--mainblue);
+	color: var(--fontwhite);
+	border-radius: 0.3rem;
+	width: 10rem;
+}
+
+main > div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+#enquiriesButton {
+	background-color: var(--secondaryyellow);
+	color: var(--mainblue);
+	border: 1px solid var(--mainblue);
+}
+
+#enquiriesButton:hover {
+	background-color: var(--backgroundwhite);
+	color: var(--mainblue);
+	border: 1px solid var(--backgroundwhite);
+}
+
+main > div > a > button:hover {
+	background-color: var(--backgroundwhite);
+	color: var(--mainblue);
+	border: 1px solid var(--mainblue);
+}
+
+@media (width >= 1024px) {
+	/* laptop only styles go here */
+	body {
+		background-position: center;
+	}
+
+	nav > img {
+		width: 2.5rem;
+	}
+
+	h1 {
+		font-size: 3.5rem;
+	}
+}
