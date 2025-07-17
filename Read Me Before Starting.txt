@@ -1,0 +1,14 @@
+//Please Remember to create a branch before you start coding. 
+
+1. Access the source control panel in vs code
+
+2. click the ... under the "repositories"
+
+3. Create branch
+
+4. name your branch
+
+5. Start coding
+
+
+//This is to prevent bugs from coming into out code base
