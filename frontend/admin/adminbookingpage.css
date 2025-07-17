@@ -36,6 +36,59 @@ nav > img {
 	width: 2rem;
 }
 
+table {
+	border: 1px solid var(--mainblue);
+	padding: 10px;
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+	border-radius: 1rem;
+}
+
+th {
+	background-color: var(--mainblue);
+	padding: 10px;
+	color: var(--fontwhite);
+	border-radius: 1rem;
+}
+
+td {
+	padding: 10px;
+	border-bottom: 1px solid var(--mainblue);
+}
+
+dialog {
+	width: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+	border: 1px solid var(--mainblue);
+}
+
+dialog > form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+form > div {
+	display: grid;
+}
+
+form > div > input,
+select {
+	border: 1px solid var(--mainblue);
+	padding: 10px;
+}
+
+form > input,
+select {
+	border: 1px solid var(--mainblue);
+	padding: 10px;
+}
+
 @media (width >= 1024px) {
 	/* laptop only styles go here */
 	nav > img {
