@@ -38,23 +38,16 @@ nav > img {
 
 table {
 	border: 1px solid var(--mainblue);
-	padding: 10px;
+	padding: 5px;
 	width: 100%;
 	text-align: center;
 	margin-top: 20px;
-	border-radius: 1rem;
 }
 
 th {
 	background-color: var(--mainblue);
-	padding: 10px;
+	padding: 5px;
 	color: var(--fontwhite);
-	border-radius: 1rem;
-}
-
-td {
-	padding: 10px;
-	border-bottom: 1px solid var(--mainblue);
 }
 
 dialog {
