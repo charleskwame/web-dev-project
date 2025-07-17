@@ -113,17 +113,16 @@ try {
 
         while ($row = mysqli_fetch_assoc($response)) {
             echo "<tr>
-                    <td>" . htmlspecialchars($row["bookingID"]) . "</td>
-                    <td>" . htmlspecialchars($row["customerName"]) . "</td>
-                    <td>" . htmlspecialchars($row["customerEmail"]) . "</td>
-                    <td>" . htmlspecialchars($row["serviceBooked"]) . "</td>
-                    <td>" . htmlspecialchars($row["bookingDate"]) . "</td>
-                    <td>
-                    <input type='submit' value='Edit' name='edit' id='editBookingButton'/>
-                    <input type='submit' value='Delete' name='delete' id='deleteBookingButton'/>
-                    </td>
-                    
-                </tr>";
+                        <td>" . htmlspecialchars($row["bookingID"]) . "</td>
+                        <td>" . htmlspecialchars($row["customerName"]) . "</td>
+                        <td>" . htmlspecialchars($row["customerEmail"]) . "</td>
+                        <td>" . htmlspecialchars($row["serviceBooked"]) . "</td>
+                        <td>" . htmlspecialchars($row["bookingDate"]) . "</td>
+                        <td>
+                            <input type='submit' value='Edit' name='edit' id='editBookingButton'/>
+                            <input type='submit' value='Delete' name='delete' id='deleteBookingButton'/>
+                        </td>
+                        </tr>";
         }
         echo "</table>";
     } else {
