@@ -38,15 +38,23 @@ nav > img {
 
 table {
 	border: 1px solid var(--mainblue);
+<<<<<<< HEAD
 	padding: 10px;
 	width: 100%;
 	text-align: center;
 	margin-top: 20px;
 	border-radius: 1rem;
+=======
+	padding: 5px;
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+>>>>>>> 1eb3ea07c00883ebd046e2f3457dde75193785df
 }
 
 th {
 	background-color: var(--mainblue);
+<<<<<<< HEAD
 	padding: 10px;
 	color: var(--fontwhite);
 	border-radius: 1rem;
@@ -55,6 +63,10 @@ th {
 td {
 	padding: 10px;
 	border-bottom: 1px solid var(--mainblue);
+=======
+	padding: 5px;
+	color: var(--fontwhite);
+>>>>>>> 1eb3ea07c00883ebd046e2f3457dde75193785df
 }
 
 dialog {

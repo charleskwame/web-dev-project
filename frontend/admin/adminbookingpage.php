@@ -53,6 +53,7 @@
 
 <script>
     window.onload = () => {
+<<<<<<< HEAD
         if (window.innerWidth < 800) {
             const tables = document.getElementById("table")
             const screenNotBigParagraphTag = document.createElement("p")
@@ -60,6 +61,8 @@
             document.body.appendChild(screenNotBigParagraphTag)
             tables.style.display = "none"
         }
+=======
+>>>>>>> 09106b0d07ce54ec4ca1d75d9e100e1758d5f6e9
         const editBookingButtons = document.querySelectorAll("#editBookingButton")
         const editBookingDialog = document.getElementById("editBookingDialog")
         editBookingButtons.forEach((editBookingButton) => {
@@ -123,6 +126,30 @@ try {
                             <input type='submit' value='Delete' name='delete' id='deleteBookingButton'/>
                         </td>
                         </tr>";
+<<<<<<< HEAD
+                    <td>" . htmlspecialchars($row["bookingID"]) . "</td>
+                    <td>" . htmlspecialchars($row["customerName"]) . "</td>
+                    <td>" . htmlspecialchars($row["customerEmail"]) . "</td>
+                    <td>" . htmlspecialchars($row["serviceBooked"]) . "</td>
+                    <td>" . htmlspecialchars($row["bookingDate"]) . "</td>
+                    <td>
+                    <input type='submit' value='Edit' name='edit' id='editBookingButton'/>
+                    <input type='submit' value='Delete' name='delete' id='deleteBookingButton'/>
+                    </td>
+                    
+                </tr>";
+=======
+                        <td>" . htmlspecialchars($row["bookingID"]) . "</td>
+                        <td>" . htmlspecialchars($row["customerName"]) . "</td>
+                        <td>" . htmlspecialchars($row["customerEmail"]) . "</td>
+                        <td>" . htmlspecialchars($row["serviceBooked"]) . "</td>
+                        <td>" . htmlspecialchars($row["bookingDate"]) . "</td>
+                        <td>
+                            <input type='submit' value='Edit' name='edit' id='editBookingButton'/>
+                            <input type='submit' value='Delete' name='delete' id='deleteBookingButton'/>
+                        </td>
+                        </tr>";
+>>>>>>> 09106b0d07ce54ec4ca1d75d9e100e1758d5f6e9
         }
         echo "</table>";
     } else {
