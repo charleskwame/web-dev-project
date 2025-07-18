@@ -31,34 +31,77 @@
             <div>
                 <label for="serviceBooked">Select New Service</label>
                 <select name="serviceBooked" id="">
-                    <option value="none">None</option>
-                    <option value="webDevelopment">Web Development</option>
-                    <option value="networkServices">Network Services</option>
-                    <option value="serverServices">Server Services</option>
+                    <option value="">None</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Network Services">Network Services</option>
+                    <option value="Server Services">Server Services</option>
                 </select>
             </div>
-            <input type="submit" value="Update Booking" name="updateBooking">
+            <div>
+                <label for="">Enter New Booking Date</label>
+                <input type="date" name="bookingDate" id="">
+            </div>
+            <div class="dialogDiv">
+                <input type="submit" value="Update Booking" name="updateBooking">
+                <button id="cancelUpdateButton">Cancel Update</button>
+            </div>
         </form>
     </dialog>
 
     <!-- dialog to delete booking -->
     <dialog id="deleteBookingDialog">
-        <form action="../../backend/admin/deletebooking.php" method="post">
+        <form action="../../backend/admin/deletebooking.php" method="get">
             <label for="">Enter the ID of the booking to delete</label>
-            <input type="text" name="bookingID">
-            <input type="submit" value="Delete Booking">
+            <input type="text" name="bookingID" required>
+            <div class="dialogDiv">
+                <button id="cancelDeleteButton">Cancel Delete</button>
+                <input type="submit" value="Delete Booking" name="deleteIDButton" id="confirmDeleteButton">
+            </div>
         </form>
     </dialog>
+
+    <!-- dialog to delete enquiry -->
+    <dialog id="deleteEnquiryDialog">
+        <form action="../../backend/admin/deleteenquiry.php" method="get">
+            <label for="">Enter the ID of the enquiry to delete</label>
+            <input type="text" name="enquiryID" required>
+            <div class="dialogDiv">
+                <button id="cancelDeleteEnquiryButton">Cancel Delete</button>
+                <input type="submit" value="Delete Enquiry" name="deleteIDButton" id="confirmDeleteButton">
+            </div>
+        </form>
+    </dialog>
+
+    <section id="bookingSection">
+        <!-- booking heading -->
+        <h1 id="bookingHeading">Current Bookings</h1>
+
+        <!-- no booking heading -->
+        <h2 id="noBookingHeading"></h2>
+    </section>
+
+    <!-- div for enquiries table -->
+    <section id="enquiriesSection">
+        <h1 id="enquiriesHeading">Current Enquiries</h1>
+
+        <!-- no enquiry heading -->
+        <h2 id="noEnquiryHeading"></h2>
+    </section>
 </body>
 
 <script>
     window.onload = () => {
         if (window.innerWidth < 800) {
-            const tables = document.getElementById("table")
+            const bookingSection = document.getElementById("bookingSection")
+            const enquiriesSection = document.getElementById("enquiriesSection")
+            const bookingTableHeading = document.getElementById("bookingHeading")
+            const noEnquiriesTableHeading = document.getElementById("noEnquiryHeading")
+            const noBookingTableHeading = document.getElementById("noBookingHeading")
             const screenNotBigParagraphTag = document.createElement("p")
             screenNotBigParagraphTag.innerText = "Dashboard Only Available On Tablets And Desktops"
             document.body.appendChild(screenNotBigParagraphTag)
-            tables.style.display = "none"
+            bookingSection.style.display = "none"
+            enquiriesSection.style.display = "none"
         }
         const editBookingButtons = document.querySelectorAll("#editBookingButton")
         const editBookingDialog = document.getElementById("editBookingDialog")
@@ -68,6 +111,12 @@
             })
         })
 
+        const cancelUpdateButton = document.getElementById("cancelUpdateButton")
+        cancelUpdateButton.addEventListener("click", () => {
+            editBookingDialog.close()
+        })
+
+
 
         const deleteBookingButtons = document.querySelectorAll("#deleteBookingButton")
         const deleteBookingDialog = document.getElementById("deleteBookingDialog")
@@ -76,6 +125,35 @@
                 deleteBookingDialog.showModal()
             })
         })
+        const cancelDeleteButton = document.getElementById("cancelDeleteButton")
+        cancelDeleteButton.addEventListener("click", () => {
+            deleteBookingDialog.close()
+        })
+
+
+        const deleteEnquiryButtons = document.querySelectorAll("#deleteEnquiryButton")
+        const deleteEnquiryDialog = document.getElementById("deleteEnquiryDialog")
+        deleteEnquiryButtons.forEach((deleteEnquiryButton) => {
+            deleteEnquiryButton.addEventListener("click", () => {
+                deleteEnquiryDialog.showModal()
+            })
+        })
+        const cancelDeleteEnquiryButton = document.getElementById("cancelDeleteButton")
+        cancelDeleteEnquiryButton.addEventListener("click", () => {
+            deleteEnquiryDialog.close()
+        })
+
+        const noBookingTableHeading = document.getElementById("noBookingHeading")
+        const bookingSection = document.getElementById("bookingSection")
+        const bookingTable = document.getElementById("bookingTable")
+        bookingSection.appendChild(bookingTable)
+        //bookingSection.appendChild(noBookingTableHeading)
+
+        const noEnquiriesTableHeading = document.getElementById("noEnquiryHeading")
+        const enquiriesSection = document.getElementById("enquiriesSection")
+        const enquiriesTable = document.getElementById("enquiriesTable")
+        enquiriesSection.appendChild(enquiriesTable)
+        //enquiriesSection.appendChild(noEnquiriesTableHeading)
     }
 </script>
 
@@ -93,15 +171,15 @@ $database = "nacom_database";
 $connection = "";
 try {
     $connection = mysqli_connect($server, $user, $password, $database);
-    $sqlQueryToViewTable = "SELECT * FROM bookings";
+    $sqlQueryToViewBookings = "SELECT * FROM bookings";
+    $sqlQueryToViewEnquiries = "SELECT * FROM enquiries";
 
-    $response = $connection->query($sqlQueryToViewTable);
+    $bookingsResponse = $connection->query($sqlQueryToViewBookings);
 
-    //$row = $response -> fetch_assoc($response));
-    if ($response->num_rows > 0) {
+    if ($bookingsResponse->num_rows > 0) {
 
-        //echo "<h3>Registered Users</h3>";
-        echo "<table cellpadding = '0' cellspacing='0' id='table'>";
+        // bookings table display
+        echo "<table cellpadding = '0' cellspacing='0' id='bookingTable'>";
         echo "<tr>
                 <th>Booking ID</th>
                 <th>Customer Name</th>
@@ -111,7 +189,7 @@ try {
                 <th>Edit Booking</th>
              </tr>";
 
-        while ($row = mysqli_fetch_assoc($response)) {
+        while ($row = mysqli_fetch_assoc($bookingsResponse)) {
             echo "<tr>
                         <td>" . htmlspecialchars($row["bookingID"]) . "</td>
                         <td>" . htmlspecialchars($row["customerName"]) . "</td>
@@ -126,11 +204,47 @@ try {
         }
         echo "</table>";
     } else {
-        echo "No data found.";
+        echo "<script>
+        const noBookingHeading = document.getElementById('noBookingHeading');
+        noBookingHeading.innerHTML = 'No Bookings Have Been Made Yet';
+        </script>";
+    }
+
+    $enquiriesResponse = $connection->query($sqlQueryToViewEnquiries);
+    if ($enquiriesResponse->num_rows > 0) {
+        // enquiries table display
+        echo "<table cellpadding = '0' cellspacing='0' id='enquiriesTable'>";
+        echo "<tr>
+                <th>Enquiry ID</th>
+                <th>Customer Name</th>
+                <th>Customer Email</th>
+                <th>Customer Phone</th>
+                <th>Enquiry Question</th>
+                <th>Remove Enquiry</th>
+                  
+             </tr>";
+
+        while ($row = mysqli_fetch_assoc($enquiriesResponse)) {
+            echo "<tr>
+                        <td>" . htmlspecialchars($row["enquiryID"]) . "</td>
+                        <td>" . htmlspecialchars($row["customerName"]) . "</td>
+                        <td>" . htmlspecialchars($row["customerEmail"]) . "</td>
+                        <td>" . htmlspecialchars($row["customerPhoneNumber"]) . "</td>
+                        <td>" . htmlspecialchars($row["enquiryQuestion"]) . "</td>
+                        <td>
+                            <input type='submit' value='Delete' name='delete' id='deleteEnquiryButton'/>
+                        </td>
+                        </tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "<script>
+        const noEnquiryHeading = document.getElementById('noEnquiryHeading');
+        noEnquiryHeading.innerHTML = 'No Enquiries Have Been Made Yet';
+        </script>";
     }
 
     $connection->close();
-    //echo "Connection success";
 } catch (\Throwable $th) {
     echo "Cannot connect to the database<br>";
 }

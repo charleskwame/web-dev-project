@@ -19,6 +19,7 @@
 html,
 body {
 	height: 100%;
+	color: var(--fontblack);
 }
 
 body {
@@ -34,6 +35,11 @@ nav {
 
 nav > img {
 	width: 2rem;
+}
+
+h2 {
+	text-align: center;
+	color: var(--fontblack);
 }
 
 table {
@@ -84,9 +90,28 @@ select {
 }
 
 form > input,
-select {
+select,
+button {
 	border: 1px solid var(--mainblue);
 	padding: 10px;
+	border-radius: 1rem;
+}
+
+section {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.dialogDiv {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	gap: 10px;
+}
+
+#confirmDeleteButton {
+	background-color: red;
+	border-radius: 1rem;
 }
 
 @media (width >= 1024px) {

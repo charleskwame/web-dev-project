@@ -13,11 +13,11 @@ try {
 }
 
 if (isset($_GET["deleteIDButton"])) {
-    $inputID = intval($_GET['bookingID']);
-    $sqlQueryToDeleteBooking = "DELETE FROM bookings WHERE bookingID = $inputID";
-    if (mysqli_query($connection, $sqlQueryToDeleteBooking) === TRUE) {
+    $inputID = intval($_GET['enquiryID']);
+    $sqlQueryToDeleteEnquiry = "DELETE FROM enquiries WHERE enquiryID = $inputID";
+    if (mysqli_query($connection, $sqlQueryToDeleteEnquiry) === TRUE) {
         header("Location: ../../frontend/admin/adminbookingpage.php");
     } else {
-        echo "Cannot Delete User at the moment<br>";
+        echo "Cannot Delete Enquiry at the moment<br>";
     }
 }
