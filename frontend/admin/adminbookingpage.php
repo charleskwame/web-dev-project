@@ -11,6 +11,10 @@
 <body>
     <nav>
         <img src="../assets/images/logo.png" alt="logo">
+
+        <a href="../../frontend/admin/addusers.php"><button>
+                Add a new admin user
+            </button></a>
     </nav>
 
     <!-- dialog to edit booking details -->
@@ -74,7 +78,13 @@
 
     <section id="bookingSection">
         <!-- booking heading -->
-        <h1 id="bookingHeading">Current Bookings</h1>
+        <div id="bookingHeadingAndButtonsDiv">
+            <h1 id="bookingHeading">Current Bookings</h1>
+            <div>
+                <button id="editBookingButton">Edit Booking</button>
+                <button id="deleteBookingButton">Delete Booking</button>
+            </div>
+        </div>
 
         <!-- no booking heading -->
         <h2 id="noBookingHeading"></h2>
@@ -82,8 +92,12 @@
 
     <!-- div for enquiries table -->
     <section id="enquiriesSection">
-        <h1 id="enquiriesHeading">Current Enquiries</h1>
-
+        <div id="enquiriesHeadingAndButtonsDiv">
+            <h1 id="enquiriesHeading">Current Enquiries</h1>
+            <div>
+                <button id="deleteEnquiryButton">Delete Enquiry</button>
+            </div>
+        </div>
         <!-- no enquiry heading -->
         <h2 id="noEnquiryHeading"></h2>
     </section>
@@ -138,7 +152,7 @@
                 deleteEnquiryDialog.showModal()
             })
         })
-        const cancelDeleteEnquiryButton = document.getElementById("cancelDeleteButton")
+        const cancelDeleteEnquiryButton = document.getElementById("cancelDeleteEnquiryButton")
         cancelDeleteEnquiryButton.addEventListener("click", () => {
             deleteEnquiryDialog.close()
         })
@@ -186,7 +200,6 @@ try {
                 <th>Customer Email</th>
                 <th>Service Booked</th>
                 <th>Booking Date</th>
-                <th>Edit Booking</th>
              </tr>";
 
         while ($row = mysqli_fetch_assoc($bookingsResponse)) {
@@ -196,10 +209,6 @@ try {
                         <td>" . htmlspecialchars($row["customerEmail"]) . "</td>
                         <td>" . htmlspecialchars($row["serviceBooked"]) . "</td>
                         <td>" . htmlspecialchars($row["bookingDate"]) . "</td>
-                        <td>
-                            <input type='submit' value='Edit' name='edit' id='editBookingButton'/>
-                            <input type='submit' value='Delete' name='delete' id='deleteBookingButton'/>
-                        </td>
                         </tr>";
         }
         echo "</table>";
@@ -219,9 +228,7 @@ try {
                 <th>Customer Name</th>
                 <th>Customer Email</th>
                 <th>Customer Phone</th>
-                <th>Enquiry Question</th>
-                <th>Remove Enquiry</th>
-                  
+                <th>Enquiry Question</th>    
              </tr>";
 
         while ($row = mysqli_fetch_assoc($enquiriesResponse)) {
@@ -231,9 +238,6 @@ try {
                         <td>" . htmlspecialchars($row["customerEmail"]) . "</td>
                         <td>" . htmlspecialchars($row["customerPhoneNumber"]) . "</td>
                         <td>" . htmlspecialchars($row["enquiryQuestion"]) . "</td>
-                        <td>
-                            <input type='submit' value='Delete' name='delete' id='deleteEnquiryButton'/>
-                        </td>
                         </tr>";
         }
         echo "</table>";

@@ -42,7 +42,7 @@ h2 {
 	color: var(--fontblack);
 }
 
-#bookingHeadingAndButtonsDiv {
+#adminUserHeadingAndButtonDiv {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

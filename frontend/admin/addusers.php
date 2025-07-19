@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./addusers.css?v= <?php echo date('his'); ?>">
+    <title>Admin Add Users</title>
+</head>
+
+<body>
+    <nav>
+        <img src="../assets/images/logo.png" alt="logo">
+
+        <a href="../../frontend/admin/adminbookingpage.php"><button>
+                View Bookings & Enquiries
+            </button></a>
+    </nav>
+
+    <!-- dialog to edit booking details -->
+    <dialog id="addAdminUserDialog">
+        <form action="../../backend/admin/addadminuser.php" method="post">
+            <div>
+                <label for="">Enter Admin Name</label>
+                <input type="text" name="adminName" required />
+            </div>
+            <div>
+                <label for="">Enter Admin Email</label>
+                <input type="text" name="adminEmail" id="" required />
+            </div>
+            <div>
+                <label for="">Enter Admin Password</label>
+                <input type="text" name="adminPassword" id="" required />
+            </div>
+            <div>
+                <label for="adminRole">Select Admin Role</label>
+                <select name="adminRole" id="" required>
+                    <option value="">None</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Technician">Technician</option>
+                    <option value="Developer">Developer</option>
+                </select>
+            </div>
+            <div class="dialogDiv">
+                <input type="submit" value="Add Admin" name="addAdminUser">
+                <button id="cancelAddAdminUser">Cancel Add</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- dialog to delete admin -->
+    <dialog id="deleteAdminUserDialog">
+        <form action="../../backend/admin/deleteadminuser.php" method="get">
+            <label for="">Enter the ID of the Admin User to delete</label>
+            <input type="text" name="adminID" required>
+            <div class="dialogDiv">
+                <button id="cancelDeleteButton">Cancel Delete</button>
+                <input type="submit" value="Delete Admin" name="deleteIDButton" id="confirmDeleteButton">
+            </div>
+        </form>
+    </dialog>
+
+
+    <!-- div for enquiries table -->
+    <section id="adminUserSection">
+        <div id="adminUserHeadingAndButtonDiv">
+            <h1 id="adminUserHeading">Current Admin Users</h1>
+            <div>
+                <button id="addAdminUserButton">Add Admin User</button>
+                <button id="deleteAdminUserButton">Delete Admin User</button>
+            </div>
+        </div>
+        <!-- no enquiry heading -->
+        <h2 id="noAdminUserHeading"></h2>
+    </section>
+</body>
+
+<script>
+    window.onload = () => {
+        if (window.innerWidth < 800) {
+            const adminUserSection = document.getElementById("adminUserSection")
+            const noAdminUserHeading = document.getElementById("noAdminUserHeading")
+            const screenNotBigParagraphTag = document.createElement("p")
+            screenNotBigParagraphTag.innerText = "Dashboard Only Available On Tablets And Desktops"
+            document.body.appendChild(screenNotBigParagraphTag)
+            adminUserSection.style.display = "none"
+        }
+
+        const addAdminUserButton = document.querySelectorAll("#addAdminUserButton")
+        const addAdminUserDialog = document.getElementById("addAdminUserDialog")
+        addAdminUserButton.forEach((addAdminUserButton) => {
+            addAdminUserButton.addEventListener("click", () => {
+                addAdminUserDialog.showModal()
+            })
+        })
+
+        const cancelAddAdminUser = document.getElementById("cancelAddAdminUser")
+        cancelAddAdminUser.addEventListener("click", () => {
+            addAdminUserDialog.close()
+        })
+
+
+
+        const deleteAdminUserButtons = document.querySelectorAll("#deleteAdminUserButton")
+        const deleteAdminUserDialog = document.getElementById("deleteAdminUserDialog")
+        deleteAdminUserButtons.forEach((deleteAdminButton) => {
+            deleteAdminButton.addEventListener("click", () => {
+                deleteAdminUserDialog.showModal()
+            })
+        })
+
+        const cancelDeleteButton = document.getElementById("cancelDeleteButton")
+        cancelDeleteButton.addEventListener("click", () => {
+            deleteAdminUserDialog.close()
+        })
+
+        const adminUserSection = document.getElementById("adminUserSection")
+        const adminUsersTable = document.getElementById("adminUsersTable")
+        adminUserSection.appendChild(adminUsersTable)
+
+    }
+</script>
+
+</html>
+
+
+<!-- php script to connect to the database -->
+<?php
+// establishing connection to database
+$server = "localhost";
+$user = "root";
+$password = "";
+$database = "nacom_database";
+$connection = "";
+try {
+    $connection = mysqli_connect($server, $user, $password, $database);
+    $sqlQueryToViewAdminUsers = "SELECT * FROM admin_users";
+    $adminUsersResponse = $connection->query($sqlQueryToViewAdminUsers);
+
+    if ($adminUsersResponse->num_rows > 0) {
+        // bookings table display
+        echo "<table cellpadding = '0' cellspacing='0' id='adminUsersTable'>";
+        echo "<tr>
+                <th>Admin ID</th>
+                <th>Admin Name</th>
+                <th>Admin Email</th>
+                <th>Admin Password</th>
+                <th>Admin Role</th>
+             </tr>";
+
+        while ($row = mysqli_fetch_assoc($adminUsersResponse)) {
+            echo "<tr>
+                        <td>" . htmlspecialchars($row["adminID"]) . "</td>
+                        <td>" . htmlspecialchars($row["adminName"]) . "</td>
+                        <td>" . htmlspecialchars($row["adminEmail"]) . "</td>
+                        <td>" . htmlspecialchars($row["adminPassword"]) . "</td>
+                        <td>" . htmlspecialchars($row["adminRole"]) . "</td>
+                        </tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "<script>
+        const noAdminUsersHeading = document.getElementById('noAdminUserHeading');
+        noAdminUserHeading.innerHTML = 'No Admin Users Have Been Added Yet';
+        </script>";
+    }
+    $connection->close();
+} catch (\Throwable $th) {
+    echo "<h2>Cannot connect to the database</h2>";
+}
