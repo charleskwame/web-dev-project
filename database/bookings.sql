@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2025 at 11:22 AM
+-- Generation Time: Jul 19, 2025 at 08:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -28,12 +28,33 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `bookings` (
-  `bookingID` int(5) NOT NULL,
+  `bookingID` int(2) NOT NULL,
   `customerName` varchar(30) NOT NULL,
   `customerEmail` varchar(50) NOT NULL,
   `serviceBooked` varchar(30) NOT NULL,
-  `bookingDate` varchar(10) NOT NULL
+  `bookingDate` varchar(10) NOT NULL,
+  `bookingStatus` varchar(20) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`bookingID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `bookingID` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
