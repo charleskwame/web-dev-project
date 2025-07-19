@@ -42,8 +42,8 @@
                 </select>
             </div>
             <div class="dialogDiv">
-                <input type="submit" value="Add Admin" name="addAdminUser">
                 <button id="cancelAddAdminUser">Cancel Add</button>
+                <input type="submit" value="Add Admin" name="addAdminUser" id="confirmAddAdminButton">
             </div>
         </form>
     </dialog>
@@ -71,7 +71,55 @@
             </div>
         </div>
         <!-- no enquiry heading -->
-        <h2 id="noAdminUserHeading"></h2>
+        <!-- <h2 id="noAdminUserHeading"></h2> -->
+        <!-- php script to connect to the database -->
+        <?php
+        // establishing connection to database
+        $server = "localhost";
+        $user = "root";
+        $password = "";
+        $database = "nacom_database";
+        $connection = "";
+        try {
+            $connection = mysqli_connect($server, $user, $password, $database);
+            $sqlQueryToViewAdminUsers = "SELECT * FROM admin_users";
+            $adminUsersResponse = $connection->query($sqlQueryToViewAdminUsers);
+
+            if ($adminUsersResponse->num_rows > 0) {
+                // bookings table display
+                echo "<table cellpadding = '0' cellspacing='0' id='adminUsersTable'>";
+                echo "<tr>
+                <th>Admin ID</th>
+                <th>Admin Name</th>
+                <th>Admin Email</th>
+                <th>Admin Password</th>
+                <th>Admin Role</th>
+             </tr>";
+
+                while ($row = mysqli_fetch_assoc($adminUsersResponse)) {
+                    echo "<tr>
+                        <td>" . htmlspecialchars($row["adminID"]) . "</td>
+                        <td>" . htmlspecialchars($row["adminName"]) . "</td>
+                        <td>" . htmlspecialchars($row["adminEmail"]) . "</td>
+                        <td>" . htmlspecialchars($row["adminPassword"]) . "</td>
+                        <td>" . htmlspecialchars($row["adminRole"]) . "</td>
+                        </tr>";
+                }
+                echo "</table>";
+            } else {
+                echo "<script>
+        const noAdminUserHeading = document.createElement('h2')
+        noAdminUserHeading.setAttribute('id','noAdminUserHeading');
+        noAdminUserHeading.innerHTML = 'No Admin Users Added Yet';
+        const adminUserSection = document.getElementById('adminUserSection')
+        adminUserSection.appendChild(noAdminUserHeading)
+        </script>";
+            }
+            $connection->close();
+        } catch (\Throwable $th) {
+            echo "<h2>Cannot connect to the database</h2>";
+        }
+        ?>
     </section>
 </body>
 
@@ -80,7 +128,7 @@
         if (window.innerWidth < 800) {
             const adminUserSection = document.getElementById("adminUserSection")
             const noAdminUserHeading = document.getElementById("noAdminUserHeading")
-            const screenNotBigParagraphTag = document.createElement("p")
+            const screenNotBigParagraphTag = document.createElement("h2")
             screenNotBigParagraphTag.innerText = "Dashboard Only Available On Tablets And Desktops"
             document.body.appendChild(screenNotBigParagraphTag)
             adminUserSection.style.display = "none"
@@ -122,49 +170,3 @@
 </script>
 
 </html>
-
-
-<!-- php script to connect to the database -->
-<?php
-// establishing connection to database
-$server = "localhost";
-$user = "root";
-$password = "";
-$database = "nacom_database";
-$connection = "";
-try {
-    $connection = mysqli_connect($server, $user, $password, $database);
-    $sqlQueryToViewAdminUsers = "SELECT * FROM admin_users";
-    $adminUsersResponse = $connection->query($sqlQueryToViewAdminUsers);
-
-    if ($adminUsersResponse->num_rows > 0) {
-        // bookings table display
-        echo "<table cellpadding = '0' cellspacing='0' id='adminUsersTable'>";
-        echo "<tr>
-                <th>Admin ID</th>
-                <th>Admin Name</th>
-                <th>Admin Email</th>
-                <th>Admin Password</th>
-                <th>Admin Role</th>
-             </tr>";
-
-        while ($row = mysqli_fetch_assoc($adminUsersResponse)) {
-            echo "<tr>
-                        <td>" . htmlspecialchars($row["adminID"]) . "</td>
-                        <td>" . htmlspecialchars($row["adminName"]) . "</td>
-                        <td>" . htmlspecialchars($row["adminEmail"]) . "</td>
-                        <td>" . htmlspecialchars($row["adminPassword"]) . "</td>
-                        <td>" . htmlspecialchars($row["adminRole"]) . "</td>
-                        </tr>";
-        }
-        echo "</table>";
-    } else {
-        echo "<script>
-        const noAdminUsersHeading = document.getElementById('noAdminUserHeading');
-        noAdminUserHeading.innerHTML = 'No Admin Users Have Been Added Yet';
-        </script>";
-    }
-    $connection->close();
-} catch (\Throwable $th) {
-    echo "<h2>Cannot connect to the database</h2>";
-}
