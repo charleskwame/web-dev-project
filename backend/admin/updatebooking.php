@@ -9,10 +9,10 @@ try {
     // updating booking info here
     if (isset($_POST['updateBooking'])) {
         $bookingID = intval($_POST['bookingID']);
-        $newCustomerName = $_POST['customerName'];
-        $newCustomerEmail = $_POST['customerEmail'];
-        $newServiceBooked = $_POST['serviceBooked'];
-        $newBookingDate = $_POST['bookingDate'];
+        $newBookingStatus = $_POST['bookingStatus'];
+        // $newCustomerEmail = $_POST['customerEmail'];
+        // $newServiceBooked = $_POST['serviceBooked'];
+        // $newBookingDate = $_POST['bookingDate'];
 
 
         // getting data from table to modify
@@ -31,29 +31,29 @@ try {
                 $bindParameters = '';
                 $bindValuesArray = [];
 
-                if (!empty($newCustomerName) && $newCustomerName !== $currentDataFromTable["customerName"]) {
-                    $updateColumnsArray[] = 'customerName = ?';
+                if (!empty($newBookingStatus) && $newBookingStatus !== $currentDataFromTable["bookingStatus"]) {
+                    $updateColumnsArray[] = 'bookingStatus = ?';
                     $bindParameters .= 's';
-                    $bindValuesArray[] = $newCustomerName;
+                    $bindValuesArray[] = $newBookingStatus;
                 }
 
-                if (!empty($newCustomerEmail) && $newCustomerEmail !== $currentDataFromTable["customerEmail"]) {
-                    $updateColumnsArray[] = 'customerEmail = ?';
-                    $bindParameters .= 's';
-                    $bindValuesArray[] = $newCustomerEmail;
-                }
+                // if (!empty($newCustomerEmail) && $newCustomerEmail !== $currentDataFromTable["customerEmail"]) {
+                //     $updateColumnsArray[] = 'customerEmail = ?';
+                //     $bindParameters .= 's';
+                //     $bindValuesArray[] = $newCustomerEmail;
+                // }
 
-                if (!empty($newServiceBooked) && $newServiceBooked !== $currentDataFromTable["serviceBooked"]) {
-                    $updateColumnsArray[] = 'serviceBooked = ?';
-                    $bindParameters .= 's';
-                    $bindValuesArray[] = $newServiceBooked;
-                }
+                // if (!empty($newServiceBooked) && $newServiceBooked !== $currentDataFromTable["serviceBooked"]) {
+                //     $updateColumnsArray[] = 'serviceBooked = ?';
+                //     $bindParameters .= 's';
+                //     $bindValuesArray[] = $newServiceBooked;
+                // }
 
-                if (!empty($newBookingDate) && $newBookingDate !== $currentDataFromTable["bookingDate"]) {
-                    $updateColumnsArray[] = 'bookingDate = ?';
-                    $bindParameters .= 's';
-                    $bindValuesArray[] = $newBookingDate;
-                }
+                // if (!empty($newBookingDate) && $newBookingDate !== $currentDataFromTable["bookingDate"]) {
+                //     $updateColumnsArray[] = 'bookingDate = ?';
+                //     $bindParameters .= 's';
+                //     $bindValuesArray[] = $newBookingDate;
+                // }
 
                 if (!empty($updateColumnsArray)) {
                     $bindParameters .= 'i';
