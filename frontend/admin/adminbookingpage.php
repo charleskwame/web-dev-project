@@ -22,7 +22,7 @@
         <form action="../../backend/admin/updatebooking.php" method="post">
             <div>
                 <label for="">Enter Booking ID</label>
-                <input type="text" name="bookingID" />
+                <input type="text" name="bookingID" required />
             </div>
             <!-- <div>
                 <label for="">Enter New Customer Name</label>
@@ -34,7 +34,7 @@
             </div> -->
             <div>
                 <label for="bookingStatus">Select New Booking Status</label>
-                <select name="bookingStatus" id="">
+                <select name="bookingStatus" id="" required>
                     <option value="">None</option>
                     <option value="Pending">Pending</option>
                     <option value="Confirmed">Confirmed</option>
