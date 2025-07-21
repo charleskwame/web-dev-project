@@ -35,7 +35,7 @@ nav {
 	justify-content: space-between;
 }
 
-nav > img {
+nav > a > img {
 	width: 2rem;
 }
 
@@ -113,7 +113,7 @@ main > div > a > button:hover {
 		background-position: center;
 	}
 
-	nav > img {
+	nav > a > img {
 		width: 2.5rem;
 	}
 

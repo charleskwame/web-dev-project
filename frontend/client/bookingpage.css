@@ -30,7 +30,7 @@ nav {
 	/* padding: 20px; */
 }
 
-nav > img {
+nav > a > img {
 	width: 2rem;
 }
 
@@ -60,7 +60,7 @@ nav a.active::after {
 
 main {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	/* grid-template-columns: repeat(2, 1fr); */
 	gap: 30px;
 	/* padding: 20px; */
 	margin-top: 30px;
@@ -85,12 +85,13 @@ main {
 .services {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	gap: 10px;
+	/* gap: 10px; */
 }
 
 .service {
+	/* width: fit-content; */
+	/* border: 1px solid var(--mainblue); */
 	text-align: center;
-	border: 1px solid var(--mainblue);
 	border-radius: 10px;
 	padding: 10px;
 	transition: transform 0.3s ease;
@@ -102,9 +103,9 @@ main {
 }
 
 .service img {
-	width: 250px;
-	height: 150px;
-	margin-bottom: 10px;
+	width: 80%;
+	/* height: 150px; */
+	/* margin-bottom: 10px; */
 	border-radius: 8px;
 }
 
@@ -112,7 +113,8 @@ main {
 	text-decoration: none;
 	color: var(--mainblue);
 	font-size: small;
-	display: block;
+	/* display: block; */
+	width: fit;
 }
 
 .booking form {
@@ -157,4 +159,19 @@ form > div > label {
 
 label {
 	color: var(--mainblue);
+}
+
+@media (width >= 1024px) {
+	/* laptop only styles go here */
+	nav > a > img {
+		width: 2.5rem;
+	}
+
+	main {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 30px;
+		/* padding: 20px; */
+		margin-top: 30px;
+	}
 }
