@@ -5,10 +5,44 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./adminloginpage.css?v= <?php echo date('his'); ?>">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
         <title>Admin Log In</title>
     </head>
 
     <body>
+        <nav>
+            <a href="../client/index.html">
+                <img src="../assets/images/logo.png" alt="logo">
+            </a>
+        </nav>
+        <form action="../../backend/admin/adminlogin.php" method="post" id="adminLogInForm" onsubmit="toast()">
+            <h1>Admin Log In</h1>
+            <div>
+
+                <label for="adminEmail">Enter Admin Email</label>
+                <input type="text" name="adminEmail" required>
+            </div>
+            <div>
+
+                <label for="adminPassword">Enter Admin Password</label>
+                <input type="text" name="adminPassword" required>
+            </div>
+            <input type="submit" value="Log In" name="adminLogInButton" id="adminLogInButton">
+        </form>
     </body>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js">
+
+    </script>
+
+    <script>
+        const toast = () => {
+            Toastify({
+                text: 'Loggin In...',
+                position: 'center',
+                duration: 1000,
+            }).showToast();
+        }
+    </script>
 
 </html>

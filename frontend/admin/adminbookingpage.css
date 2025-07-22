@@ -37,15 +37,27 @@ nav > img {
 	width: 2rem;
 }
 
-nav > a > button {
+nav > div > a > button {
 	background-color: var(--fontwhite);
 	border: 1px solid var(--mainblue);
 	color: var(--mainblue);
 	cursor: pointer;
+	transition: background-color 0.3s, color 0.3s;
 }
 
-nav > a > button:hover {
+nav > div > a > button:hover {
 	background-color: var(--mainblue);
+	color: var(--fontwhite);
+}
+
+#logOutButton {
+	color: red;
+	border: 1px solid red;
+	transition: background-color 0.3s, color 0.3s;
+}
+
+#logOutButton:hover {
+	background-color: red;
 	color: var(--fontwhite);
 }
 

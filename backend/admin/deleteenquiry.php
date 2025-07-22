@@ -17,6 +17,7 @@ if (isset($_GET["deleteIDButton"])) {
     $sqlQueryToDeleteEnquiry = "DELETE FROM enquiries WHERE enquiryID = $inputID";
     if (mysqli_query($connection, $sqlQueryToDeleteEnquiry) === TRUE) {
         header("Location: ../../frontend/admin/adminbookingpage.php");
+        sleep(1);
     } else {
         echo "Cannot Delete Enquiry at the moment<br>";
     }

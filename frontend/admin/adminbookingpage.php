@@ -1,3 +1,11 @@
+<!-- starting session to make sure admin is logged in -->
+<?php
+session_start();
+if (empty($_SESSION['adminLoggedInEmail'])) {
+    header("Location: ./adminloginpage.html");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./adminbookingpage.css?v= <?php echo date('his'); ?>">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Admin Booking Dashboard</title>
 </head>
 
@@ -12,26 +21,25 @@
     <nav>
         <img src="../assets/images/logo.png" alt="logo">
 
-        <a href="../../frontend/admin/addusers.php"><button>
-                Add a new admin user
-            </button></a>
+        <div>
+            <a href="../../frontend/admin/addusers.php"><button>
+                    Manage Admin Users
+                </button></a>
+            <a href="../../backend/admin/logout.php">
+                <button id="logOutButton">
+                    Log Out
+                </button>
+            </a>
+        </div>
     </nav>
 
     <!-- dialog to edit booking details -->
     <dialog id="editBookingDialog">
-        <form action="../../backend/admin/updatebooking.php" method="post">
+        <form action="../../backend/admin/updatebooking.php" method="post" onsubmit="toast('Updating Booking Details')">
             <div>
                 <label for="">Enter Booking ID</label>
                 <input type="text" name="bookingID" required />
             </div>
-            <!-- <div>
-                <label for="">Enter New Customer Name</label>
-                <input type="text" name="customerName" id="">
-            </div>
-            <div>
-                <label for="">Enter New Customer Email</label>
-                <input type="text" name="customerEmail" id="">
-            </div> -->
             <div>
                 <label for="bookingStatus">Select New Booking Status</label>
                 <select name="bookingStatus" id="" required>
@@ -41,20 +49,16 @@
                     <option value="Cancelled">Cancelled</option>
                 </select>
             </div>
-            <!-- <div>
-                <label for="">Enter New Booking Date</label>
-                <input type="date" name="bookingDate" id="">
-            </div> -->
             <div class="dialogDiv">
-                <input type="submit" value="Update Booking Status" name="updateBooking" id="updateBookingButton">
                 <button id="cancelUpdateButton">Cancel Update</button>
+                <input type="submit" value="Update Booking Status" name="updateBooking" id="updateBookingButton">
             </div>
         </form>
     </dialog>
 
     <!-- dialog to delete booking -->
     <dialog id="deleteBookingDialog">
-        <form action="../../backend/admin/deletebooking.php" method="get">
+        <form action="../../backend/admin/deletebooking.php" method="get" onsubmit="toast('Deleting Booking')">
             <label for="">Enter the ID of the booking to delete</label>
             <input type="text" name="bookingID" required>
             <div class="dialogDiv">
@@ -66,7 +70,7 @@
 
     <!-- dialog to delete enquiry -->
     <dialog id="deleteEnquiryDialog">
-        <form action="../../backend/admin/deleteenquiry.php" method="get">
+        <form action="../../backend/admin/deleteenquiry.php" method="get" onsubmit="toast('Deleting Enquiry')">
             <label for="">Enter the ID of the enquiry to delete</label>
             <input type="text" name="enquiryID" required>
             <div class="dialogDiv">
@@ -271,6 +275,16 @@
             enquiriesSection.appendChild(enquiriesTable)
         }
     }
+
+    const toast = (actionName) => {
+        Toastify({
+            text: actionName,
+            position: 'center',
+            duration: 1000,
+        }).showToast();
+    }
 </script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 </html>

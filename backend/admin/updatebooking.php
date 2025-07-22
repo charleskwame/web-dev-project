@@ -37,24 +37,6 @@ try {
                     $bindValuesArray[] = $newBookingStatus;
                 }
 
-                // if (!empty($newCustomerEmail) && $newCustomerEmail !== $currentDataFromTable["customerEmail"]) {
-                //     $updateColumnsArray[] = 'customerEmail = ?';
-                //     $bindParameters .= 's';
-                //     $bindValuesArray[] = $newCustomerEmail;
-                // }
-
-                // if (!empty($newServiceBooked) && $newServiceBooked !== $currentDataFromTable["serviceBooked"]) {
-                //     $updateColumnsArray[] = 'serviceBooked = ?';
-                //     $bindParameters .= 's';
-                //     $bindValuesArray[] = $newServiceBooked;
-                // }
-
-                // if (!empty($newBookingDate) && $newBookingDate !== $currentDataFromTable["bookingDate"]) {
-                //     $updateColumnsArray[] = 'bookingDate = ?';
-                //     $bindParameters .= 's';
-                //     $bindValuesArray[] = $newBookingDate;
-                // }
-
                 if (!empty($updateColumnsArray)) {
                     $bindParameters .= 'i';
                     $bindValuesArray[] = $bookingID;
@@ -89,6 +71,7 @@ try {
             echo "<script>alert('Error, Cannot Get Data To Update From Database.')</script>";
         }
     }
+    sleep(1);
     header("Location: ../../frontend/admin/adminbookingpage.php");
 } catch (\Throwable $th) {
     echo "<h2>Cannot connect to the database</h2>";

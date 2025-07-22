@@ -17,6 +17,7 @@ if (isset($_GET["deleteIDButton"])) {
     $sqlQueryToDeleteBooking = "DELETE FROM bookings WHERE bookingID = $inputID";
     if (mysqli_query($connection, $sqlQueryToDeleteBooking) === TRUE) {
         header("Location: ../../frontend/admin/adminbookingpage.php");
+        sleep(1);
     } else {
         echo "Cannot Delete User at the moment<br>";
     }

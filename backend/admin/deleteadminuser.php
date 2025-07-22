@@ -12,10 +12,10 @@ try {
         $sqlQueryToDeleteAdminUser = "DELETE FROM admin_users WHERE adminID = $inputID";
         if (mysqli_query($connection, $sqlQueryToDeleteAdminUser) === TRUE) {
             header("Location: ../../frontend/admin/addusers.php");
-        } else {
-            echo "<h2>Cannot Delete Admin User at the moment</h2>";
         }
     }
+    sleep(1);
 } catch (\Throwable $th) {
     echo "<h2>Cannot connect to the database</h2>";
 }
+header("Location: ../../frontend/admin/addusers.php");

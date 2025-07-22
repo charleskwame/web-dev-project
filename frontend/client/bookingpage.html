@@ -4,7 +4,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./bookingpage.css?v= <?php echo date('his'); ?>">
+        <link rel="stylesheet" href="./bookingpage.css?v= <? php echo date('his'); ?>">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
         <title>Book Consultation</title>
     </head>
 
@@ -55,7 +56,7 @@
             <div class="booking">
                 <h2>Book a consultation with us</h2>
                 <div class="booking-form">
-                    <form action="../../backend/client/bookingpage.php" method="post">
+                    <form action="../../backend/client/bookingpage.php" method="post" onsubmit="toast()">
                         <div>
                             <label for="">Enter your name</label>
                             <input type="text" name="customerName" required>
@@ -88,5 +89,15 @@
             </div>
         </main>
     </body>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        const toast = () => {
+            Toastify({
+                text: 'Booking Completed. Waiting Confirmation From Administrator',
+                position: 'center',
+                duration: 3000,
+            }).showToast();
+        }
+    </script>
 
 </html>

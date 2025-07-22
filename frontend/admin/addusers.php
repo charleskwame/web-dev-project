@@ -1,3 +1,11 @@
+<!-- starting session to make sure admin is logged in -->
+<?php
+session_start();
+if (empty($_SESSION['adminLoggedInEmail'])) {
+    header("Location: ./adminloginpage.html");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./addusers.css?v= <?php echo date('his'); ?>">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Admin Add Users</title>
 </head>
 
@@ -17,9 +26,9 @@
             </button></a>
     </nav>
 
-    <!-- dialog to edit booking details -->
+    <!-- adding admin user -->
     <dialog id="addAdminUserDialog">
-        <form action="../../backend/admin/addadminuser.php" method="post">
+        <form action="../../backend/admin/addadminuser.php" method="post" onsubmit="toast('Adding User')">
             <div>
                 <label for="">Enter Admin Name</label>
                 <input type="text" name="adminName" required />
@@ -50,7 +59,7 @@
 
     <!-- dialog to delete admin -->
     <dialog id="deleteAdminUserDialog">
-        <form action="../../backend/admin/deleteadminuser.php" method="get">
+        <form action="../../backend/admin/deleteadminuser.php" method="get" onsubmit="toast('Deleting Admin User')">
             <label for="">Enter the ID of the Admin User to delete</label>
             <input type="text" name="adminID" required>
             <div class="dialogDiv">
@@ -167,6 +176,16 @@
         adminUserSection.appendChild(adminUsersTable)
 
     }
+
+    const toast = (actionName) => {
+        Toastify({
+            text: actionName,
+            position: 'center',
+            duration: 1000,
+        }).showToast();
+    }
 </script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 </html>
