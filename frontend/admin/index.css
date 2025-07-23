@@ -30,6 +30,12 @@ nav {
 	justify-content: space-between;
 }
 
+h2 {
+	text-align: center;
+	margin-top: 50px;
+	color: var(--mainblue);
+}
+
 nav > a > img {
 	width: 2rem;
 }

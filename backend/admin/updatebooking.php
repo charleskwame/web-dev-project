@@ -8,13 +8,8 @@ try {
     $connection = mysqli_connect($server, $user, $password, $database);
     // updating booking info here
     if (isset($_POST['updateBooking'])) {
-        $bookingID = intval($_POST['bookingID']);
-        $newBookingStatus = $_POST['bookingStatus'];
-        // $newCustomerEmail = $_POST['customerEmail'];
-        // $newServiceBooked = $_POST['serviceBooked'];
-        // $newBookingDate = $_POST['bookingDate'];
-
-
+        $bookingID = htmlspecialchars(intval($_POST['bookingID']));
+        $newBookingStatus = htmlspecialchars($_POST['bookingStatus']);
         // getting data from table to modify
         $sqlSelectQuery = "SELECT * FROM bookings WHERE bookingID = ?";
         $sqlSelectStatement = $connection->prepare($sqlSelectQuery);
@@ -72,7 +67,7 @@ try {
         }
     }
     sleep(1);
-    header("Location: ../../frontend/admin/adminbookingpage.php");
+    header("Location: ../../frontend/admin/admindashboard.php");
 } catch (\Throwable $th) {
     echo "<h2>Cannot connect to the database</h2>";
 }

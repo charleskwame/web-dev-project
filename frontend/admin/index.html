@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./index.css?v=<?php echo date('his'); ?>">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <title>Admin Log In</title>
+    </head>
+
+    <body id="body">
+        <nav>
+            <a href="../client/index.html">
+                <img src="../assets/images/logo.png" alt="logo">
+            </a>
+        </nav>
+        <form action="../../backend/admin/adminlogin.php" method="post" id="adminLogInForm" onsubmit="toast()">
+            <h1>Admin Log In</h1>
+            <div>
+
+                <label for="adminEmail">Enter Admin Email</label>
+                <!-- <input type="text" name="adminEmail" required> -->
+                <input type="text" name="adminEmail" onkeydown="return /[a-zA-Z@0-9.]/i.test(event.key)"
+                    placeholder="Enter Admin Email" pattern="[^@]+@[^\.]+\..+" minlength="3" maxlength="50" required>
+            </div>
+            <div>
+
+                <label for="adminPassword">Enter Admin Password</label>
+                <input type="text" name="adminPassword" placeholder="Enter Admin Password" minlength="8" maxlength="15"
+                    required>
+            </div>
+            <input type="submit" value="Log In" name="adminLogInButton" id="adminLogInButton">
+        </form>
+    </body>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js">
+
+    </script>
+
+    <script>
+        if (window.innerWidth < 800) {
+            // const bookingSection = document.getElementById("bookingSection")
+            // const enquiriesSection = document.getElementById("enquiriesSection")
+            // const bookingTableHeading = document.getElementById("bookingHeading")
+            // const noEnquiriesTableHeading = document.getElementById("noEnquiryHeading")
+            // const noBookingTableHeading = document.getElementById("noBookingHeading")
+            // const divider = document.getElementById("divider")
+            const adminLogInForm = document.getElementById("adminLogInForm")
+            adminLogInForm.style.display = "none"
+            const screenNotBigParagraphTag = document.createElement("h2")
+            screenNotBigParagraphTag.setAttribute("id", "screenNotBigParagraphTag")
+            screenNotBigParagraphTag.innerText = "Admin Log In Only Available On Tablets And Desktops"
+            document.body.appendChild(screenNotBigParagraphTag)
+        } else {
+            const toast = () => {
+                Toastify({
+                    text: 'Loggin In...',
+                    position: 'center',
+                    duration: 1000,
+                }).showToast();
+            }
+        }
+    </script>
+
+</html>
