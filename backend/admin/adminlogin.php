@@ -13,8 +13,8 @@ try {
     if ($connection) {
         // getting admin credentials to compare to database
         if (isset($_POST['adminLogInButton'])) {
-            $adminEmail = $_POST['adminEmail'];
-            $adminPassword = $_POST['adminPassword'];
+            $adminEmail = htmlspecialchars($_POST['adminEmail']);
+            $adminPassword = htmlspecialchars($_POST['adminPassword']);
 
             // Sql Query To retrieve credentials from database and check
             $sqlQueryToGetAdminCredentials = "SELECT * FROM admin_users WHERE adminEmail = ? AND adminPassword = ?";
@@ -31,7 +31,7 @@ try {
                     if ($adminEmail === $currentDataFromAdminTable['adminEmail'] && $adminPassword === $currentDataFromAdminTable["adminPassword"]) {
                         $_SESSION['adminLoggedInEmail'] = $adminEmail;
                         $_SESSION['adminLoggedInPassword'] = $adminPassword;
-                        header("Location: ../../frontend/admin/adminbookingpage.php");
+                        header("Location: ../../frontend/admin/admindashboard.php");
                         sleep(1);
                     } else {
                         echo "Cannot Log in";

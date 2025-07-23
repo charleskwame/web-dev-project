@@ -2,7 +2,7 @@
 <?php
 session_start();
 if (empty($_SESSION['adminLoggedInEmail'])) {
-    header("Location: ./adminloginpage.html");
+    header("Location: ./index.html");
 }
 ?>
 
@@ -21,7 +21,7 @@ if (empty($_SESSION['adminLoggedInEmail'])) {
     <nav>
         <img src="../assets/images/logo.png" alt="logo">
 
-        <a href="../../frontend/admin/adminbookingpage.php"><button>
+        <a href="../../frontend/admin/admindashboard.php"><button>
                 View Bookings & Enquiries
             </button></a>
     </nav>
@@ -31,15 +31,20 @@ if (empty($_SESSION['adminLoggedInEmail'])) {
         <form action="../../backend/admin/addadminuser.php" method="post" onsubmit="toast('Adding User')">
             <div>
                 <label for="">Enter Admin Name</label>
-                <input type="text" name="adminName" required />
+                <!-- <input type="text" name="adminName"  required /> -->
+                <input type="text" name="adminName" onkeydown="return /[a-zA-Z]/i.test(event.key)"
+                    placeholder="Enter Admin Name"
+                    minlength="3" maxlength="50" required>
             </div>
             <div>
                 <label for="">Enter Admin Email</label>
-                <input type="text" name="adminEmail" id="" required />
+                <!-- <input type="text" name="adminEmail" id="" required /> -->
+                <input type="text" name="adminEmail" onkeydown="return /[a-zA-Z@0-9.]/i.test(event.key)"
+                    placeholder="Enter Admin Email" pattern="[^@]+@[^\.]+\..+" minlength="3" maxlength="50" required>
             </div>
             <div>
                 <label for="">Enter Admin Password</label>
-                <input type="text" name="adminPassword" id="" required />
+                <input type="text" name="adminPassword" id="" minlength="8" maxlength="15" required />
             </div>
             <div>
                 <label for="adminRole">Select Admin Role</label>
@@ -61,7 +66,7 @@ if (empty($_SESSION['adminLoggedInEmail'])) {
     <dialog id="deleteAdminUserDialog">
         <form action="../../backend/admin/deleteadminuser.php" method="get" onsubmit="toast('Deleting Admin User')">
             <label for="">Enter the ID of the Admin User to delete</label>
-            <input type="text" name="adminID" required>
+            <input type="text" name="adminID" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" minlength="1" maxlength="3" required>
             <div class="dialogDiv">
                 <button id="cancelDeleteButton">Cancel Delete</button>
                 <input type="submit" value="Delete Admin" name="deleteIDButton" id="confirmDeleteButton">
