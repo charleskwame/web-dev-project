@@ -37,27 +37,15 @@ nav > img {
 	width: 2rem;
 }
 
-nav > div > a > button {
+nav > a > button {
 	background-color: var(--fontwhite);
 	border: 1px solid var(--mainblue);
 	color: var(--mainblue);
 	cursor: pointer;
-	transition: background-color 0.3s, color 0.3s;
 }
 
-nav > div > a > button:hover {
+nav > a > button:hover {
 	background-color: var(--mainblue);
-	color: var(--fontwhite);
-}
-
-#logOutButton {
-	color: red;
-	border: 1px solid red;
-	transition: background-color 0.3s, color 0.3s;
-}
-
-#logOutButton:hover {
-	background-color: red;
 	color: var(--fontwhite);
 }
 
@@ -77,11 +65,9 @@ h2 {
 	color: var(--mainblue);
 }
 
-#editBookingButton,
-#updateBookingButton,
-#confirmDeleteButton,
-#cancelDeleteButton,
-#cancelDeleteEnquiryButton {
+#addAdminUserButton,
+#confirmAddAdminButton,
+#cancelDeleteButton {
 	background-color: var(--mainblue);
 	color: var(--fontwhite);
 	cursor: pointer;
@@ -89,18 +75,15 @@ h2 {
 	transition: background-color 0.3s, color 0.3s;
 }
 
-#editBookingButton:hover,
-#updateBookingButton:hover,
-#confirmDeleteButton:hover,
-#cancelDeleteButton:hover,
-#cancelDeleteEnquiryButton:hover {
+#addAdminUserButton:hover,
+#confirmAddAdminButton:hover,
+#cancelDeleteButton:hover {
 	background-color: var(--backgroundwhite);
 	color: var(--mainblue);
 }
 
-#deleteBookingButton,
-#deleteEnquiryButton,
-#cancelUpdateButton {
+#cancelAddAdminUser,
+#deleteAdminUserButton {
 	background-color: var(--backgroundwhite);
 	border: 1px solid red;
 	color: red;
@@ -108,20 +91,13 @@ h2 {
 	transition: background-color 0.3s, color 0.3s;
 }
 
-#deleteBookingButton:hover,
-#deleteEnquiryButton:hover,
-#cancelUpdateButton:hover {
+#cancelAddAdminUser:hover,
+#deleteAdminUserButton:hover {
 	background-color: red;
 	color: var(--fontwhite);
 }
 
-#bookingHeadingAndButtonsDiv {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-#enquiriesHeadingAndButtonsDiv {
+#adminUserHeadingAndButtonDiv {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

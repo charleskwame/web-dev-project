@@ -1,0 +1,102 @@
+:root {
+	--mainblue: #14248a;
+	--secondaryyellow: #e0ca3c;
+	--fontblack: #28262c;
+	--backgroundwhite: #f9f5ff;
+	--fontwhite: #f9f5ff;
+}
+
+/* Reset all default HTML styles */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+html,
+body {
+	height: 100%;
+	background-color: var(--backgroundwhite);
+	padding: 10px;
+	color: var(--fontblack);
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+h2 {
+	text-align: center;
+	margin-top: 50px;
+	color: var(--mainblue);
+}
+
+nav > a > img {
+	width: 2rem;
+}
+
+form {
+	border: 1px solid var(--mainblue);
+	width: 40dvw;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+	border-radius: 1rem;
+	background-color: var(--backgroundwhite);
+	box-shadow: 0 4px 16px rgba(20, 36, 138, 0.15);
+	gap: 15px;
+}
+
+div {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+h1 {
+	color: var(--mainblue);
+	font-size: large;
+	border-bottom: 3px solid var(--mainblue);
+	padding-bottom: 5px;
+}
+
+#adminLogInButton {
+	background-color: var(--mainblue);
+	color: var(--fontwhite);
+	font-weight: 700;
+	border: 1px solid var(--mainblue);
+	transition: background-color 0.3s, color 0.3s;
+	cursor: pointer;
+}
+
+#adminLogInButton:hover {
+	background-color: var(--backgroundwhite);
+	color: var(--mainblue);
+}
+
+label {
+	font-size: small;
+}
+
+input {
+	padding: 10px;
+	border-radius: 1rem;
+	border: 1px solid var(--mainblue);
+}
+
+@media (width >= 1024px) {
+	/* laptop only styles go here */
+
+	nav > a > img {
+		width: 2.5rem;
+	}
+}
