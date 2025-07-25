@@ -145,11 +145,14 @@ th {
 	padding: 10px;
 	color: var(--fontwhite);
 	border-radius: 1rem;
+	font-size: small;
 }
 
 td {
-	padding: 10px;
+	padding: 5px 0;
+	font-size: small;
 	border-bottom: 1px solid var(--mainblue);
+	width: 20dvw;
 }
 
 dialog {

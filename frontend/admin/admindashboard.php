@@ -2,7 +2,7 @@
 <?php
 session_start();
 if (empty($_SESSION['adminLoggedInEmail'])) {
-    header("Location: ./index.html");
+    header("Location: ./index.php");
 }
 ?>
 

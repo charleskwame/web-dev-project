@@ -8,7 +8,7 @@ try {
     $connection = mysqli_connect($server, $user, $password, $database);
     //$connection->close();
     if (isset($_GET["deleteIDButton"])) {
-        $inputID = intval($_GET['adminID']);
+        $inputID = htmlspecialchars(intval($_GET['adminID']));
         $sqlQueryToDeleteAdminUser = "DELETE FROM admin_users WHERE adminID = $inputID";
         if (mysqli_query($connection, $sqlQueryToDeleteAdminUser) === TRUE) {
             header("Location: ../../frontend/admin/addusers.php");

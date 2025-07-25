@@ -2,4 +2,4 @@
 session_start();
 $_SESSION['adminLoggedInEmail'] = "";
 $_SESSION['adminLoggedInPassword'] = "";
-header("Location: ../../frontend/admin/index.html");
+header("Location: ../../frontend/admin/index.php");

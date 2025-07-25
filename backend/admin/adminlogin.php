@@ -37,7 +37,7 @@ try {
                         echo "Cannot Log in";
                     }
                 } else {
-                    header("Location: ../../frontend/admin/adminloginpage.html");
+                    header("Location: ../../frontend/admin/index.html");
                 }
             }
         }

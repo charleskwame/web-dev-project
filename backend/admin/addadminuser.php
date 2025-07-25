@@ -8,10 +8,10 @@ try {
     $connection = mysqli_connect($server, $user, $password, $database);
     // updating booking info here
     if (isset($_POST['addAdminUser'])) {
-        $adminName = $_POST['adminName'];
-        $adminEmail = $_POST['adminEmail'];
-        $adminPassword = $_POST['adminPassword'];
-        $adminRole = $_POST['adminRole'];
+        $adminName = htmlspecialchars($_POST['adminName']);
+        $adminEmail = htmlspecialchars($_POST['adminEmail']);
+        $adminPassword = htmlspecialchars($_POST['adminPassword']);
+        $adminRole = htmlspecialchars($_POST['adminRole']);
 
         // prepare and bind
         $sqlInsertAdminQueryStatement = $connection->prepare("INSERT INTO admin_users (adminName, adminEmail, adminPassword, adminRole) VALUES (?, ?, ?, ?)");
