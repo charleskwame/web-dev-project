@@ -34,10 +34,10 @@ try {
                         header("Location: ../../frontend/admin/admindashboard.php");
                         sleep(1);
                     } else {
-                        echo "Cannot Log in";
+                        echo "<h2>Cannot Log in</h2>";
                     }
                 } else {
-                    header("Location: ../../frontend/admin/index.html");
+                    header("Location: ../../frontend/admin/index.php");
                 }
             }
         }

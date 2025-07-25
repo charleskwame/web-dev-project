@@ -1,4 +1,10 @@
 <?php
+// starting session to prevent users from going back to this page if they have logged in already
+session_start();
+if (!empty($_SESSION['adminLoggedInEmail'])) {
+    header("Location: ./admindashboard.php");
+    exit();
+}
 // checking if database exists and creating it if not found
 $server = "localhost";
 $user = "root";
@@ -33,6 +39,7 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
     $sqlQueryToInsertManager = "INSERT INTO `admin_users`(`adminID`, `adminName`, `adminEmail`, `adminPassword`, `adminRole`) VALUES ('','Charles Tetteh','charles@nacom.com','nacomadmin1','Manager')";
     mysqli_query($connectionToDatabase, $sqlQueryToInsertManager);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +65,7 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
 
             <label for="adminEmail">Enter Admin Email</label>
             <!-- <input type="text" name="adminEmail" required> -->
-            <input type="text" name="adminEmail" onkeydown="return /[a-zA-Z@0-9.]/i.test(event.key)"
+            <input type="text" name="adminEmail"
                 placeholder="Enter Admin Email" pattern="[^@]+@[^\.]+\..+" minlength="3" maxlength="50" required>
         </div>
         <div>
@@ -91,6 +98,11 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
             duration: 1000,
         }).showToast();
     }
+
+    const adminLogInForm = document.getElementById("adminLogInForm");
+    adminLogInForm.addEventListener("submit", function(event) {
+        console.log("Form submitted:", event);
+    });
 </script>
 
 </html>

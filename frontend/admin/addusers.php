@@ -3,6 +3,7 @@
 session_start();
 if (empty($_SESSION['adminLoggedInEmail'])) {
     header("Location: ./index.php");
+    exit();
 }
 ?>
 
