@@ -34,7 +34,12 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
         PRIMARY KEY (`adminID`)
     )";
     mysqli_query($connectionToDatabase, $sqlCreateAdminUsersTable);
-
+}
+// creating default admin user
+// Check if the admin user already exists before inserting
+$checkAdminExists = "SELECT * FROM `admin_users` WHERE `adminEmail` = 'charles@nacom.com'";
+$adminExistsResult = mysqli_query($connectionToDatabase, $checkAdminExists);
+if ($adminExistsResult && mysqli_num_rows($adminExistsResult) == 0) {
     // automatically adding admin credentials of nacom manager (Charles) to be used for sign in
     $sqlQueryToInsertManager = "INSERT INTO `admin_users`(`adminID`, `adminName`, `adminEmail`, `adminPassword`, `adminRole`) VALUES ('','Charles Tetteh','charles@nacom.com','nacomadmin1','Manager')";
     mysqli_query($connectionToDatabase, $sqlQueryToInsertManager);
@@ -98,11 +103,6 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
             duration: 1000,
         }).showToast();
     }
-
-    const adminLogInForm = document.getElementById("adminLogInForm");
-    adminLogInForm.addEventListener("submit", function(event) {
-        console.log("Form submitted:", event);
-    });
 </script>
 
 </html>

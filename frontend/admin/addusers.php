@@ -132,7 +132,7 @@ if (empty($_SESSION['adminLoggedInEmail'])) {
             }
             $connection->close();
         } catch (\Throwable $th) {
-            echo "<h2>Cannot connect to the database</h2>";
+            echo "<h2>No admins currently registered. Please add an admin or Log out to reset data.</h2>";
         }
         ?>
     </section>

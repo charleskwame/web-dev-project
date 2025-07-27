@@ -3,16 +3,21 @@
 
     <head>
         <meta charset="UTF-8">
+        <!-- Set viewport for responsive design -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Link to external CSS with cache busting using PHP -->
         <link rel="stylesheet" href="./index.css?v= <?php echo date('his'); ?>">
         <title>Welcome</title>
     </head>
 
     <body>
+        <!-- Navigation bar -->
         <nav>
+            <!-- Logo linking to home page -->
             <a href="../client/index.html">
                 <img src="../assets/images/logo.png" alt="logo">
             </a>
+            <!-- Contact Us button linking to contact page -->
             <a href="../client/contactuspage.html">
                 <button>
                     Contact Us
@@ -20,11 +25,13 @@
             </a>
         </nav>
 
-
         <main>
+            <!-- Main heading -->
             <h1>Welcome to Nacom Computer Consultants</h1>
             <div>
+                <!-- Button to booking page -->
                 <a href="../client/bookingpage.php"><button id="bookUsButton">Book Us</button></a>
+                <!-- Button to enquiries page -->
                 <a href="../client/enquiriespage.php"><button id="enquiriesButton">Make Enquiries</button></a>
             </div>
         </main>
