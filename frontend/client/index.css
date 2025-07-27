@@ -1,4 +1,5 @@
 :root {
+	/* Color variables for easy theme management */
 	--mainblue: #14248a;
 	--secondaryyellow: #e0ca3c;
 	--fontblack: #28262c;
@@ -18,11 +19,12 @@
 
 html,
 body {
-	height: 100%;
+	height: 100%; /* Ensure full height for layout */
 }
 
 body {
 	padding: 10px;
+	/* Set background image and styling */
 	background-image: url("../assets/images/backgroundimage.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -30,13 +32,13 @@ body {
 }
 
 nav {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	display: flex; /* Flexbox for horizontal layout */
+	align-items: center; /* Vertically center items */
+	justify-content: space-between; /* Space between nav items */
 }
 
 nav > a > img {
-	width: 2rem;
+	width: 2rem; /* Logo/image size in nav */
 }
 
 nav > a > button {
@@ -47,15 +49,18 @@ nav > a > button {
 	background-color: var(--mainblue);
 	color: var(--fontwhite);
 	border-radius: 0.3rem;
+	transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
 nav > a > button:hover {
+	/* Button hover effect in nav */
 	background-color: var(--backgroundwhite);
 	color: var(--mainblue);
 	border: 1px solid var(--mainblue);
 }
 
 main {
+	/* Center main content both vertically and horizontally */
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -72,6 +77,7 @@ h1 {
 }
 
 main > div > a > button {
+	/* Style for main action buttons */
 	padding: 10px 10px;
 	font-weight: bold;
 	border: 1px solid var(--backgroundwhite);
@@ -80,9 +86,11 @@ main > div > a > button {
 	color: var(--fontwhite);
 	border-radius: 0.3rem;
 	width: 10rem;
+	transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
 main > div {
+	/* Center buttons horizontally in main */
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -90,34 +98,38 @@ main > div {
 }
 
 #enquiriesButton {
+	/* Special style for enquiries button */
 	background-color: var(--secondaryyellow);
 	color: var(--mainblue);
 	border: 1px solid var(--mainblue);
+	transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
 #enquiriesButton:hover {
+	/* Hover effect for enquiries button */
 	background-color: var(--backgroundwhite);
 	color: var(--mainblue);
 	border: 1px solid var(--backgroundwhite);
 }
 
 main > div > a > button:hover {
+	/* General hover effect for main buttons */
 	background-color: var(--backgroundwhite);
 	color: var(--mainblue);
 	border: 1px solid var(--mainblue);
 }
 
 @media (width >= 1024px) {
-	/* laptop only styles go here */
+	/* Laptop only styles go here */
 	body {
 		background-position: center;
 	}
 
 	nav > a > img {
-		width: 2.5rem;
+		width: 2.5rem; /* Larger logo on desktop */
 	}
 
 	h1 {
-		font-size: 3.5rem;
+		font-size: 3.5rem; /* Larger heading on desktop */
 	}
 }

@@ -163,9 +163,6 @@ form > div > label {
 	transition: max-height 0.3s ease-out, padding 0.3s ease;
 	background-color: var(--backgroundwhite);
 	font-size: small;
-	/* font-weight: bold;
-	border-bottom: 1px solid var(--mainblue);
-	border-radius: 1rem; */
 }
 
 .faq-answer.show {
