@@ -169,13 +169,30 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
             });
         });
 
-        // Toast message function triggered on form submission
-        const toast = () => {
-            Toastify({
-                text: 'Enquiry Submitted. An Administrator will contact you with a response soon',
-                position: 'center',
-                duration: 3000,
-            }).showToast();
+        window.onload = () => {
+            // Create a URLSearchParams object to easily access query parameters
+            const params = new URLSearchParams(window.location.search);
+
+            // Check if the "toast" parameter exists and equals "booking_success"
+            if (params.get('toast') === 'enquiries_success') {
+                // Show the toast notification using Toastify
+                Toastify({
+                    text: "Enquiry Sent. An Administrator will contact you soon.",
+                    position: "center", // position the toast in the center of the screen
+                    duration: 2000, // display duration in milliseconds (3 seconds)
+                }).showToast();
+
+                // Remove the "toast" query parameter from the URL to prevent
+                // the toast from showing again if the page is reloaded or revisited
+                params.delete('toast');
+
+                // Construct the new URL without the "toast" parameter
+                // If there are other parameters, keep them; otherwise, just use pathname
+                const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+
+                // Use the History API to update the URL in the browser without reloading the page
+                window.history.replaceState({}, document.title, newUrl);
+            }
         }
     </script>
 

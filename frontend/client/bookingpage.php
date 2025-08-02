@@ -100,7 +100,7 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
             <h2>Book a consultation with us</h2>
             <div class="booking-form">
                 <!-- Form to capture user booking data -->
-                <form action="../../backend/client/bookingpage.php" method="post" id="bookingForm" onsubmit="toast()">
+                <form action="../../backend/client/bookingpage.php" method="post" id="bookingForm">
                     <!-- Name input -->
                     <div>
                         <label for="">Enter your name</label>
@@ -147,12 +147,30 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
 
 <!-- Function to show toast on form submission -->
 <script>
-    const toast = () => {
-        Toastify({
-            text: 'Booking Completed. Waiting Confirmation From Administrator',
-            position: 'center',
-            duration: 3000,
-        }).showToast();
+    window.onload = () => {
+        // Create a URLSearchParams object to easily access query parameters
+        const params = new URLSearchParams(window.location.search);
+
+        // Check if the "toast" parameter exists and equals "booking_success"
+        if (params.get('toast') === 'booking_success') {
+            // Show the toast notification using Toastify
+            Toastify({
+                text: "Booking Completed. Waiting Confirmation From Administrator",
+                position: "center", // position the toast in the center of the screen
+                duration: 2000, // display duration in milliseconds (3 seconds)
+            }).showToast();
+
+            // Remove the "toast" query parameter from the URL to prevent
+            // the toast from showing again if the page is reloaded or revisited
+            params.delete('toast');
+
+            // Construct the new URL without the "toast" parameter
+            // If there are other parameters, keep them; otherwise, just use pathname
+            const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+
+            // Use the History API to update the URL in the browser without reloading the page
+            window.history.replaceState({}, document.title, newUrl);
+        }
     }
 </script>
 
