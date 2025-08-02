@@ -1,3 +1,4 @@
+/* ========== CSS Variables for consistent theme colors ========== */
 :root {
 	--mainblue: #14248a;
 	--secondaryyellow: #e0ca3c;
@@ -6,7 +7,7 @@
 	--fontwhite: #f9f5ff;
 }
 
-/* Reset all default HTML styles */
+/* ========== Reset all default HTML styles for consistency ========== */
 *,
 *::before,
 *::after {
@@ -16,17 +17,20 @@
 	border: 0;
 }
 
+/* Full height and font color for page */
 html,
 body {
 	height: 100%;
 	color: var(--fontblack);
 }
 
+/* Body background and padding */
 body {
 	padding: 10px;
 	background-color: var(--backgroundwhite);
 }
 
+/* ========== Navigation Bar Styling ========== */
 nav {
 	display: flex;
 	align-items: center;
@@ -37,6 +41,7 @@ nav > img {
 	width: 2rem;
 }
 
+/* Nav button default */
 nav > a > button {
 	background-color: var(--fontwhite);
 	border: 1px solid var(--mainblue);
@@ -44,16 +49,19 @@ nav > a > button {
 	cursor: pointer;
 }
 
+/* Nav button hover */
 nav > a > button:hover {
 	background-color: var(--mainblue);
 	color: var(--fontwhite);
 }
 
+/* Horizontal rule styling */
 hr {
 	height: 1px;
 	background-color: var(--mainblue);
 }
 
+/* Headings */
 h1 {
 	font-size: large;
 	color: var(--fontblack);
@@ -65,6 +73,7 @@ h2 {
 	color: var(--mainblue);
 }
 
+/* ========== Buttons styling for add, confirm, and cancel actions ========== */
 #addAdminUserButton,
 #confirmAddAdminButton,
 #cancelDeleteButton {
@@ -82,6 +91,7 @@ h2 {
 	color: var(--mainblue);
 }
 
+/* Buttons styled with red for delete/cancel */
 #cancelAddAdminUser,
 #deleteAdminUserButton {
 	background-color: var(--backgroundwhite);
@@ -97,16 +107,19 @@ h2 {
 	color: var(--fontwhite);
 }
 
+/* Container for heading and buttons in admin user section */
 #adminUserHeadingAndButtonDiv {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
+/* Optional styling for warning paragraph about small screens */
 #screenNotBigParagraphTag {
 	color: var(--mainblue);
 }
 
+/* ========== Table Styling ========== */
 table {
 	border: 1px solid var(--mainblue);
 	padding: 10px;
@@ -116,6 +129,7 @@ table {
 	margin-top: 10px;
 }
 
+/* Table headers */
 th {
 	background-color: var(--mainblue);
 	padding: 10px;
@@ -124,13 +138,15 @@ th {
 	font-size: small;
 }
 
+/* Table cells */
 td {
 	padding: 5px 0;
 	font-size: small;
 	border-bottom: 1px solid var(--mainblue);
-	width: 20dvw;
+	width: 20dvw; /* Note: 'dvw' is non-standard; consider 'vw' */
 }
 
+/* ========== Dialog Styling ========== */
 dialog {
 	width: 50%;
 	position: absolute;
@@ -143,16 +159,19 @@ dialog {
 	border-radius: 1rem;
 }
 
+/* Form inside dialogs uses flex layout */
 dialog > form {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 }
 
+/* Form div elements for input grouping */
 form > div {
 	display: grid;
 }
 
+/* Inputs and selects with consistent styling */
 form > div > input,
 select {
 	border: 1px solid var(--mainblue);
@@ -160,11 +179,13 @@ select {
 	border-radius: 1rem;
 }
 
+/* Duplicate rule for dialog form div - safe to keep grid gap */
 dialog > form > div {
 	display: grid;
 	gap: 5px;
 }
 
+/* Generic form controls styling */
 form > input,
 select,
 button {
@@ -173,23 +194,27 @@ button {
 	border-radius: 1rem;
 }
 
+/* Section margin spacing */
 section {
 	margin-top: 40px;
 	margin-bottom: 40px;
 }
 
+/* Select dropdown styling */
 select {
 	background-color: var(--backgroundwhite);
 	color: var(--mainblue);
 }
 
+/* Button container inside dialogs */
 .dialogDiv {
 	display: flex;
 	align-items: center;
-	justify-content: end;
+	justify-content: flex-end;
 	gap: 10px;
 }
 
+/* Confirm delete button in red */
 #confirmDeleteButton {
 	background-color: var(--backgroundwhite);
 	color: red;
@@ -202,8 +227,9 @@ select {
 	border: 1px solid red;
 }
 
-@media (width >= 1024px) {
-	/* laptop only styles go here */
+/* ========== Responsive styles ========== */
+@media (min-width: 1024px) {
+	/* Laptop and above */
 	nav > img {
 		width: 2.5rem;
 	}

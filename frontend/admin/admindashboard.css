@@ -1,4 +1,5 @@
 :root {
+	/* Define reusable color variables */
 	--mainblue: #14248a;
 	--secondaryyellow: #e0ca3c;
 	--fontblack: #28262c;
@@ -6,7 +7,7 @@
 	--fontwhite: #f9f5ff;
 }
 
-/* Reset all default HTML styles */
+/* Reset box-sizing and remove default margins/padding/borders */
 *,
 *::before,
 *::after {
@@ -16,27 +17,32 @@
 	border: 0;
 }
 
+/* Set full height and default font color */
 html,
 body {
 	height: 100%;
 	color: var(--fontblack);
 }
 
+/* Body background and padding */
 body {
 	padding: 10px;
 	background-color: var(--backgroundwhite);
 }
 
+/* Navigation bar layout: flex container with space between logo and buttons */
 nav {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
+/* Logo image size in nav */
 nav > img {
 	width: 2rem;
 }
 
+/* Styles for nav buttons inside links */
 nav > div > a > button {
 	background-color: var(--fontwhite);
 	border: 1px solid var(--mainblue);
@@ -45,27 +51,37 @@ nav > div > a > button {
 	transition: background-color 0.3s, color 0.3s;
 }
 
+/* Hover effect for nav buttons */
 nav > div > a > button:hover {
 	background-color: var(--mainblue);
 	color: var(--fontwhite);
 }
 
+/* Logout button specific styles */
 #logOutButton {
 	color: red;
 	border: 1px solid red;
 	transition: background-color 0.3s, color 0.3s;
 }
 
+/* Hover effect for logout button */
 #logOutButton:hover {
 	background-color: red;
 	color: var(--fontwhite);
 }
 
+/* Add spacing between nav buttons */
+nav > div > a + a {
+	margin-left: 10px;
+}
+
+/* Horizontal divider line */
 hr {
 	height: 1px;
 	background-color: var(--mainblue);
 }
 
+/* Heading styles */
 h1 {
 	font-size: large;
 	color: var(--fontblack);
@@ -77,6 +93,7 @@ h2 {
 	color: var(--mainblue);
 }
 
+/* Primary action buttons styling */
 #editBookingButton,
 #updateBookingButton,
 #confirmDeleteButton,
@@ -89,6 +106,7 @@ h2 {
 	transition: background-color 0.3s, color 0.3s;
 }
 
+/* Hover effect for primary buttons */
 #editBookingButton:hover,
 #updateBookingButton:hover,
 #confirmDeleteButton:hover,
@@ -98,6 +116,7 @@ h2 {
 	color: var(--mainblue);
 }
 
+/* Secondary/cancel buttons styling */
 #deleteBookingButton,
 #deleteEnquiryButton,
 #cancelUpdateButton {
@@ -108,6 +127,7 @@ h2 {
 	transition: background-color 0.3s, color 0.3s;
 }
 
+/* Hover effect for secondary/cancel buttons */
 #deleteBookingButton:hover,
 #deleteEnquiryButton:hover,
 #cancelUpdateButton:hover {
@@ -115,39 +135,53 @@ h2 {
 	color: var(--fontwhite);
 }
 
-#bookingHeadingAndButtonsDiv {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
+/* Layout for heading and buttons container in booking and enquiries sections */
+#bookingHeadingAndButtonsDiv,
 #enquiriesHeadingAndButtonsDiv {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
+/* Message shown on small screens */
 #screenNotBigParagraphTag {
 	color: var(--mainblue);
 }
 
+/* Table base styles */
 table {
+	display: block; /* Enables horizontal scroll on small screens */
+	overflow-x: auto;
+	white-space: nowrap; /* Prevents wrapping of table content */
 	border: 1px solid var(--mainblue);
 	padding: 10px;
 	width: 100%;
 	text-align: center;
+	border-collapse: separate; /* Needed for border-radius to work */
+	border-spacing: 0;
 	border-radius: 1rem;
 	margin-top: 10px;
+	overflow: hidden; /* Clips table corners */
 }
 
+/* Table header cells */
 th {
 	background-color: var(--mainblue);
 	padding: 10px;
 	color: var(--fontwhite);
-	border-radius: 1rem;
 	font-size: small;
+	/* Rounded corners for first and last header cells */
 }
 
+th:first-child {
+	border-top-left-radius: 1rem;
+}
+
+th:last-child {
+	border-top-right-radius: 1rem;
+}
+
+/* Table data cells */
 td {
 	padding: 5px 0;
 	font-size: small;
@@ -155,6 +189,7 @@ td {
 	width: 20dvw;
 }
 
+/* Dialog box styles */
 dialog {
 	width: 50%;
 	position: absolute;
@@ -167,67 +202,80 @@ dialog {
 	border-radius: 1rem;
 }
 
+/* Forms inside dialogs: vertical layout with gaps */
 dialog > form {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 }
 
+/* Container divs inside forms for layout */
 form > div {
-	display: grid;
-}
-
-form > div > input,
-select {
-	border: 1px solid var(--mainblue);
-	padding: 10px;
-	border-radius: 1rem;
-}
-
-dialog > form > div {
 	display: grid;
 	gap: 5px;
 }
 
-form > input,
+/* Inputs and selects inside forms */
+form > div > input,
 select,
+form > input,
 button {
 	border: 1px solid var(--mainblue);
 	padding: 10px;
 	border-radius: 1rem;
 }
 
+/* Section spacing */
 section {
 	margin-top: 40px;
 	margin-bottom: 40px;
 }
 
+/* Select dropdown styles */
 select {
 	background-color: var(--backgroundwhite);
 	color: var(--mainblue);
 }
 
+/* Dialog button container layout */
 .dialogDiv {
 	display: flex;
 	align-items: center;
-	justify-content: end;
+	justify-content: flex-end;
 	gap: 10px;
 }
 
+/* Confirm delete button styles */
 #confirmDeleteButton {
 	background-color: var(--backgroundwhite);
 	color: red;
 	border: 1px solid red;
 }
 
+/* Hover effect for confirm delete button */
 #confirmDeleteButton:hover {
 	background-color: red;
 	color: var(--fontwhite);
 	border: 1px solid red;
 }
 
-@media (width >= 1024px) {
-	/* laptop only styles go here */
+/* Focus styles for accessibility */
+input:focus,
+select:focus,
+button:focus {
+	outline: 2px solid var(--secondaryyellow);
+	outline-offset: 2px;
+}
+
+/* Set cursor pointer on buttons and submit inputs */
+button,
+input[type="submit"],
+input[type="button"] {
+	cursor: pointer;
+}
+
+/* Larger logo size on wider screens (laptops and up) */
+@media (min-width: 1024px) {
 	nav > img {
 		width: 2.5rem;
 	}

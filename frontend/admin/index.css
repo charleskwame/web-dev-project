@@ -1,4 +1,5 @@
 :root {
+	/* Define reusable color variables */
 	--mainblue: #14248a;
 	--secondaryyellow: #e0ca3c;
 	--fontblack: #28262c;
@@ -6,7 +7,7 @@
 	--fontwhite: #f9f5ff;
 }
 
-/* Reset all default HTML styles */
+/* Reset box-sizing and remove default margins/padding */
 *,
 *::before,
 *::after {
@@ -16,6 +17,7 @@
 	border: 0;
 }
 
+/* Set full height and global body styles */
 html,
 body {
 	height: 100%;
@@ -24,25 +26,29 @@ body {
 	color: var(--fontblack);
 }
 
+/* Navigation bar layout: horizontal alignment between logo and links */
 nav {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
+/* Centered heading for login page */
 h2 {
 	text-align: center;
 	margin-top: 50px;
 	color: var(--mainblue);
 }
 
+/* Logo image inside nav */
 nav > a > img {
 	width: 2rem;
 }
 
+/* Admin login form container */
 form {
 	border: 1px solid var(--mainblue);
-	width: 40dvw;
+	width: 40dvw; /* Responsive width based on viewport width */
 	display: flex;
 	flex-direction: column;
 	position: absolute;
@@ -53,15 +59,17 @@ form {
 	border-radius: 1rem;
 	background-color: var(--backgroundwhite);
 	box-shadow: 0 4px 16px rgba(20, 36, 138, 0.15);
-	gap: 15px;
+	gap: 15px; /* spacing between form elements */
 }
 
+/* Container divs within form */
 div {
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
 }
 
+/* Form title styling */
 h1 {
 	color: var(--mainblue);
 	font-size: large;
@@ -69,6 +77,7 @@ h1 {
 	padding-bottom: 5px;
 }
 
+/* Submit button styles */
 #adminLogInButton {
 	background-color: var(--mainblue);
 	color: var(--fontwhite);
@@ -78,24 +87,26 @@ h1 {
 	cursor: pointer;
 }
 
+/* Hover effect for button */
 #adminLogInButton:hover {
 	background-color: var(--backgroundwhite);
 	color: var(--mainblue);
 }
 
+/* Label styling */
 label {
 	font-size: small;
 }
 
+/* Input field styles */
 input {
 	padding: 10px;
 	border-radius: 1rem;
 	border: 1px solid var(--mainblue);
 }
 
+/* Styles for larger screens (1024px and up) */
 @media (width >= 1024px) {
-	/* laptop only styles go here */
-
 	nav > a > img {
 		width: 2.5rem;
 	}
