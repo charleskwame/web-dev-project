@@ -50,7 +50,7 @@ try {
     }
 
     // Redirect back to the admin user management page after insertion
-    header("Location: ../../frontend/admin/addusers.php");
+    header("Location: ../../frontend/admin/addusers.php?toast=adminadded_success");
 
     exit();
 } catch (\Throwable $th) {

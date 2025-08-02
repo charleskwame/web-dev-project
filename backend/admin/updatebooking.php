@@ -100,7 +100,7 @@ try {
     }
 
     // Redirect back to the admin dashboard page
-    header("Location: ../../frontend/admin/admindashboard.php");
+    header("Location: ../../frontend/admin/admindashboard.php?toast=updatebooking_success");
 } catch (\Throwable $th) {
     // Catch any exceptions or errors and display connection error message
     echo "<h2>Cannot connect to the database</h2>";

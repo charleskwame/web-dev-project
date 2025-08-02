@@ -49,7 +49,7 @@ try {
                         $_SESSION['adminLoggedInPassword'] = $adminPassword;
 
                         // Redirect to admin dashboard after successful login
-                        header("Location: ../../frontend/admin/admindashboard.php");
+                        header("Location: ../../frontend/admin/admindashboard.php?toast=login_success");
 
                         exit();
                     } else {
@@ -58,7 +58,7 @@ try {
                     }
                 } else {
                     // No matching user found — redirect back to login page
-                    header("Location: ../../frontend/admin/index.php");
+                    header("Location: ../../frontend/admin/index.php?toast=login_failed");
                     exit();
                 }
             }

@@ -9,7 +9,7 @@ $_SESSION['adminLoggedInEmail'] = "";
 $_SESSION['adminLoggedInPassword'] = "";
 
 // Redirect the user to the admin login page after logout
-header("Location: ../../frontend/admin/index.php");
+header("Location: ../../frontend/admin/index.php?toast=loggedout");
 
 // Stop further script execution after redirect
 exit();

@@ -25,7 +25,7 @@ try {
         // Execute deletion query and check if successful
         if (mysqli_query($connection, $sqlQueryToDeleteBooking) === TRUE) {
             // Redirect to admin dashboard after successful deletion
-            header("Location: ../../frontend/admin/admindashboard.php");
+            header("Location: ../../frontend/admin/admindashboard.php?toast=deletebooking_success");
 
             // Stop further execution after redirect
             exit();

@@ -83,7 +83,7 @@ if ($adminExistsResult && mysqli_num_rows($adminExistsResult) == 0) {
     </nav>
 
     <!-- Admin Login Form -->
-    <form action="../../backend/admin/adminlogin.php" method="post" id="adminLogInForm" onsubmit="toast()">
+    <form action="../../backend/admin/adminlogin.php" method="post" id="adminLogInForm">
         <h1>Admin Log In</h1>
 
         <!-- Email Field -->
@@ -122,13 +122,52 @@ if ($adminExistsResult && mysqli_num_rows($adminExistsResult) == 0) {
         document.body.appendChild(screenNotBigParagraphTag);
     }
 
-    // Show toast message when form is submitted
-    const toast = () => {
-        Toastify({
-            text: 'Loggin In...',
-            position: 'center',
-            duration: 1000,
-        }).showToast();
+
+    window.onload = () => {
+        // Create a URLSearchParams object to easily access query parameters
+        const params = new URLSearchParams(window.location.search);
+
+        // Check if the "toast" parameter exists and equals "booking_success"
+        if (params.get('toast') === 'login_failed') {
+            // Show the toast notification using Toastify
+            Toastify({
+                text: "Cannot Log In. Check Credentials and Try Again",
+                position: "center", // position the toast in the center of the screen
+                duration: 2000, // display duration in milliseconds (3 seconds)
+            }).showToast();
+
+            // Remove the "toast" query parameter from the URL to prevent
+            // the toast from showing again if the page is reloaded or revisited
+            params.delete('toast');
+
+            // Construct the new URL without the "toast" parameter
+            // If there are other parameters, keep them; otherwise, just use pathname
+            const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+
+            // Use the History API to update the URL in the browser without reloading the page
+            window.history.replaceState({}, document.title, newUrl);
+        }
+
+        // Check if the "toast" parameter exists and equals "booking_success"
+        if (params.get('toast') === 'loggedout') {
+            // Show the toast notification using Toastify
+            Toastify({
+                text: "Admin Logged Out Successfully",
+                position: "center", // position the toast in the center of the screen
+                duration: 2000, // display duration in milliseconds (3 seconds)
+            }).showToast();
+
+            // Remove the "toast" query parameter from the URL to prevent
+            // the toast from showing again if the page is reloaded or revisited
+            params.delete('toast');
+
+            // Construct the new URL without the "toast" parameter
+            // If there are other parameters, keep them; otherwise, just use pathname
+            const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+
+            // Use the History API to update the URL in the browser without reloading the page
+            window.history.replaceState({}, document.title, newUrl);
+        }
     }
 </script>
 

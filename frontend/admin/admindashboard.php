@@ -39,7 +39,7 @@ if (empty($_SESSION['adminLoggedInEmail'])) {
 
     <!-- Dialog to edit booking details -->
     <dialog id="editBookingDialog">
-        <form action="../../backend/admin/updatebooking.php" method="post" onsubmit="toast('Updating Booking Details')">
+        <form action="../../backend/admin/updatebooking.php" method="post">
             <div>
                 <label for="">Enter Booking ID</label>
                 <!-- Numeric input validation to only allow digits -->
@@ -64,7 +64,7 @@ if (empty($_SESSION['adminLoggedInEmail'])) {
 
     <!-- Dialog to delete booking -->
     <dialog id="deleteBookingDialog">
-        <form action="../../backend/admin/deletebooking.php" method="post" onsubmit="toast('Deleting Booking')">
+        <form action="../../backend/admin/deletebooking.php" method="post">
             <label for="">Enter the ID of the booking to delete</label>
             <input type="text" name="bookingID" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" minlength="1" maxlength="3" required />
             <div class="dialogDiv">
@@ -76,7 +76,7 @@ if (empty($_SESSION['adminLoggedInEmail'])) {
 
     <!-- Dialog to delete enquiry -->
     <dialog id="deleteEnquiryDialog">
-        <form action="../../backend/admin/deleteenquiry.php" method="post" onsubmit="toast('Deleting Enquiry')">
+        <form action="../../backend/admin/deleteenquiry.php" method="post">
             <label for="">Enter the ID of the enquiry to delete</label>
             <input type="text" name="enquiryID" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" minlength="1" maxlength="3" required />
             <div class="dialogDiv">
@@ -221,6 +221,9 @@ if (empty($_SESSION['adminLoggedInEmail'])) {
 </body>
 
 <script>
+    // Define params to read URL parameters
+    const params = new URLSearchParams(window.location.search);
+
     window.onload = () => {
         // Responsive behavior: if screen smaller than 800px, hide main sections and show a message
         if (window.innerWidth < 800) {
@@ -289,15 +292,89 @@ if (empty($_SESSION['adminLoggedInEmail'])) {
             const enquiriesTable = document.getElementById("enquiriesTable");
             if (enquiriesTable) enquiriesSection.appendChild(enquiriesTable);
         }
-    };
+        // Check if the "toast" parameter exists and equals "login_success"
+        if (params.get('toast') === 'login_success') {
+            // Show the toast notification using Toastify
+            Toastify({
+                text: "Logged In.",
+                position: "center", // position the toast in the center of the screen
+                duration: 3000, // display duration in milliseconds (3 seconds)
+            }).showToast();
 
-    // Toastify notification helper function
-    const toast = (actionName) => {
-        Toastify({
-            text: actionName,
-            position: 'center',
-            duration: 1000,
-        }).showToast();
+            // Remove the "toast" query parameter from the URL to prevent
+            // the toast from showing again if the page is reloaded or revisited
+            params.delete('toast');
+
+            // Construct the new URL without the "toast" parameter
+            // If there are other parameters, keep them; otherwise, just use pathname
+            const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+
+            // Use the History API to update the URL in the browser without reloading the page
+            window.history.replaceState({}, document.title, newUrl);
+        }
+
+        // Check if the "toast" parameter exists and equals "login_success"
+        if (params.get('toast') === 'updatebooking_success') {
+            // Show the toast notification using Toastify
+            Toastify({
+                text: "Booking Details Updated",
+                position: "center", // position the toast in the center of the screen
+                duration: 3000, // display duration in milliseconds (3 seconds)
+            }).showToast();
+
+            // Remove the "toast" query parameter from the URL to prevent
+            // the toast from showing again if the page is reloaded or revisited
+            params.delete('toast');
+
+            // Construct the new URL without the "toast" parameter
+            // If there are other parameters, keep them; otherwise, just use pathname
+            const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+
+            // Use the History API to update the URL in the browser without reloading the page
+            window.history.replaceState({}, document.title, newUrl);
+        }
+
+        // Check if the "toast" parameter exists and equals "login_success"
+        if (params.get('toast') === 'deletebooking_success') {
+            // Show the toast notification using Toastify
+            Toastify({
+                text: "Booking Deleted",
+                position: "center", // position the toast in the center of the screen
+                duration: 3000, // display duration in milliseconds (3 seconds)
+            }).showToast();
+
+            // Remove the "toast" query parameter from the URL to prevent
+            // the toast from showing again if the page is reloaded or revisited
+            params.delete('toast');
+
+            // Construct the new URL without the "toast" parameter
+            // If there are other parameters, keep them; otherwise, just use pathname
+            const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+
+            // Use the History API to update the URL in the browser without reloading the page
+            window.history.replaceState({}, document.title, newUrl);
+        }
+
+        // Check if the "toast" parameter exists and equals "login_success"
+        if (params.get('toast') === 'deleteenquiry_success') {
+            // Show the toast notification using Toastify
+            Toastify({
+                text: "Enquiry Deleted",
+                position: "center", // position the toast in the center of the screen
+                duration: 3000, // display duration in milliseconds (3 seconds)
+            }).showToast();
+
+            // Remove the "toast" query parameter from the URL to prevent
+            // the toast from showing again if the page is reloaded or revisited
+            params.delete('toast');
+
+            // Construct the new URL without the "toast" parameter
+            // If there are other parameters, keep them; otherwise, just use pathname
+            const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+
+            // Use the History API to update the URL in the browser without reloading the page
+            window.history.replaceState({}, document.title, newUrl);
+        }
     };
 </script>
 

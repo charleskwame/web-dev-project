@@ -22,7 +22,7 @@ try {
         // Execute the delete query and check if it was successful
         if (mysqli_query($connection, $sqlQueryToDeleteEnquiry) === TRUE) {
             // Redirect to admin dashboard after successful deletion
-            header("Location: ../../frontend/admin/admindashboard.php");
+            header("Location: ../../frontend/admin/admindashboard.php?toast=deleteenquiry_success");
 
             // Stop further script execution after redirect
             exit();

@@ -29,7 +29,7 @@ if (empty($_SESSION['adminLoggedInEmail'])) {
 
     <!-- Add Admin User Dialog -->
     <dialog id="addAdminUserDialog">
-        <form action="../../backend/admin/addadminuser.php" method="post" onsubmit="toast('Adding User')">
+        <form action="../../backend/admin/addadminuser.php" method="post">
             <div>
                 <label for="adminName">Enter Admin Name</label>
                 <input
@@ -83,7 +83,7 @@ if (empty($_SESSION['adminLoggedInEmail'])) {
 
     <!-- Delete Admin User Dialog -->
     <dialog id="deleteAdminUserDialog">
-        <form action="../../backend/admin/deleteadminuser.php" method="get" onsubmit="toast('Deleting Admin User')">
+        <form action="../../backend/admin/deleteadminuser.php" method="get">
             <label for="adminID">Enter the ID of the Admin User to delete</label>
             <input
                 type="number"
@@ -185,15 +185,50 @@ if (empty($_SESSION['adminLoggedInEmail'])) {
             document.getElementById("cancelDeleteButton").addEventListener("click", () => {
                 document.getElementById("deleteAdminUserDialog").close();
             });
-        };
 
-        // Toast notification helper
-        const toast = (message) => {
-            Toastify({
-                text: message,
-                position: "center",
-                duration: 1000,
-            }).showToast();
+            // Create a URLSearchParams object to easily access query parameters
+            const params = new URLSearchParams(window.location.search);
+            // Check if the "toast" parameter exists and equals "login_success"
+            if (params.get('toast') === 'adminadded_success') {
+                // Show the toast notification using Toastify
+                Toastify({
+                    text: "Admin User Added",
+                    position: "center", // position the toast in the center of the screen
+                    duration: 3000, // display duration in milliseconds (3 seconds)
+                }).showToast();
+
+                // Remove the "toast" query parameter from the URL to prevent
+                // the toast from showing again if the page is reloaded or revisited
+                params.delete('toast');
+
+                // Construct the new URL without the "toast" parameter
+                // If there are other parameters, keep them; otherwise, just use pathname
+                const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+
+                // Use the History API to update the URL in the browser without reloading the page
+                window.history.replaceState({}, document.title, newUrl);
+            }
+
+            // Check if the "toast" parameter exists and equals "login_success"
+            if (params.get('toast') === 'admindeleted_success') {
+                // Show the toast notification using Toastify
+                Toastify({
+                    text: "Admin User Deleted",
+                    position: "center", // position the toast in the center of the screen
+                    duration: 3000, // display duration in milliseconds (3 seconds)
+                }).showToast();
+
+                // Remove the "toast" query parameter from the URL to prevent
+                // the toast from showing again if the page is reloaded or revisited
+                params.delete('toast');
+
+                // Construct the new URL without the "toast" parameter
+                // If there are other parameters, keep them; otherwise, just use pathname
+                const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+
+                // Use the History API to update the URL in the browser without reloading the page
+                window.history.replaceState({}, document.title, newUrl);
+            }
         };
     </script>
 </body>

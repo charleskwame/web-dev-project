@@ -20,7 +20,7 @@ try {
         // Execute query and check if successful
         if (mysqli_query($connection, $sqlQueryToDeleteAdminUser) === TRUE) {
             // Redirect immediately on success
-            header("Location: ../../frontend/admin/addusers.php");
+            header("Location: ../../frontend/admin/addusers.php?toast=admindeleted_success");
             exit();  // Stop further script execution
         } else {
             // Optional: handle deletion failure here
