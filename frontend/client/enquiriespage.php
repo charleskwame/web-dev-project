@@ -1,24 +1,34 @@
 <?php
-// checking if database exists and creating it if not found
+// Define database connection parameters
 $server = "localhost";
 $user = "root";
 $password = "";
 $database = "nacom_database";
+
+// Connect to MySQL server without selecting a database yet
 $connection = mysqli_connect($server, $user, $password);
+
+// Query to check if the database already exists
 $sqlDatabaseCheck = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$database'";
 $result = mysqli_query($connection, $sqlDatabaseCheck);
+
+// If the database does not exist, create it
 if ($result && mysqli_num_rows($result) == 0) {
-    // echo "does not exist";
+    // Database not found, create it
     $sqlCreateDatabase = "CREATE DATABASE IF NOT EXISTS $database";
     mysqli_query($connection, $sqlCreateDatabase);
 }
-// Check if 'bookings' table exists in the newly created database
+
+// Connect again, now specifying the target database
 $connectionToDatabase = mysqli_connect($server, $user, $password, $database);
+
+// Query to check if the 'enquiries' table exists
 $sqlTableCheckQuery = "SHOW TABLES LIKE 'enquiries'";
 $sqlTableCheckResult = mysqli_query($connectionToDatabase, $sqlTableCheckQuery);
 
+// If the 'enquiries' table doesn't exist, create it
 if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
-    // Table does not exist, create it
+    // SQL query to create 'enquiries' table with necessary fields
     $sqlCreateEnquiriesTable = "CREATE TABLE `enquiries` (
         `enquiryID` int(3) NOT NULL AUTO_INCREMENT,
         `customerName` varchar(30) NOT NULL,
@@ -36,8 +46,13 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
 
 <head>
     <meta charset="UTF-8">
+    <!-- Responsive display settings -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Toastify CSS for toast notifications -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <!-- Custom CSS for the enquiries page, with cache-busting query string -->
     <link rel="stylesheet" href="./enquiriespage.css?v= <?php echo date('his'); ?>">
     <title>Enquiries</title>
 </head>
@@ -45,6 +60,7 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
 <body>
     <header>
         <nav class="nav">
+            <!-- Logo and navigation links -->
             <a href="../client/index.html">
                 <img src="../assets/images/logo.png" alt="">
             </a>
@@ -57,104 +73,103 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
     </header>
 
     <main>
-        <!-- <h1>How Can We Help You?</h1> -->
+        <!-- Frequently Asked Questions Section -->
         <section class="faq-section">
             <h2>Frequently Asked Questions</h2>
 
+            <!-- Each FAQ item contains a question and its corresponding answer -->
             <div class="faq-item">
                 <div class="faq-question">What services do you offer?</div>
                 <div class="faq-answer">
                     <p>We provide a comprehensive range of services including Web Design, Mobile Application Design,
-                        Network Set Up and
-                        Server Set Up. Our team specializes in delivering high-quality solutions tailored to your
-                        specific
-                        needs.</p>
+                        Network Set Up and Server Set Up.</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">How long does a typical project take?</div>
                 <div class="faq-answer">
-                    <p>Project timelines vary depending on scope and complexity. Most standard projects are
-                        completed within 2-4 weeks, while more extensive engagements may take 6-8 weeks. We'll
-                        provide a detailed timeline during our initial consultation.</p>
+                    <p>Project timelines vary depending on scope. Most projects are completed within 2-4 weeks, or up to 8 weeks for more complex tasks.</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">What are your working hours?</div>
                 <div class="faq-answer">
-                    <p>Our office is open Monday through Friday from 9:00 AM to 6:00 PM. Emergency support is
-                        available 24/7 for existing clients.</p>
+                    <p>Monday through Friday, 9:00 AM to 6:00 PM. Emergency support is available 24/7 for existing clients.</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">Do you offer customized solutions?</div>
                 <div class="faq-answer">
-                    <p>Absolutely! Every client receives a personalized solution. We begin each engagement with
-                        a
-                        discovery session to understand your unique requirements before proposing any solutions.
-                    </p>
+                    <p>Yes! We tailor every solution to the client's unique requirements after a discovery session.</p>
                 </div>
             </div>
         </section>
 
+        <!-- Contact form for submitting enquiries -->
         <section class="contact-section">
             <h2>Email Us Your Questions</h2>
 
+            <!-- Enquiry form submission -->
             <form action="../../backend/client/enquiriespage.php" method="post" class="contact-form" id="enquiryForm" onsubmit="toast()">
+                <!-- Name input with character restriction -->
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" name="customerName" id="name" onkeydown="return /[a-zA-Z ]/i.test(event.key)"
                         placeholder="Enter your name"
                         minlength="3" maxlength="50" required>
-                    <!-- <input type="text" id="name" name="customerName" required placeholder="John Smith"> -->
                 </div>
 
+                <!-- Email input with basic pattern validation -->
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="email" name="customerEmail" pattern="[^@]+@[^\.]+\..+" placeholder="aba@gmail.com"
                         minlength="10" maxlength="50" required>
-                    <!-- <input type="email" id="email" name="customerEmail" required placeholder="john@example.com"> -->
                 </div>
 
+                <!-- Phone number input with digit-only validation -->
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
                     <input type="tel" id="phone" name="customerPhoneNumber" minlength="10" maxlength="10" onkeydown="return /[0-9]|Backspace/i.test(event.key)" placeholder="0200000000" required>
                 </div>
 
+                <!-- Textarea for the user to type their question -->
                 <div class="form-group">
                     <label for="question">Your Question</label>
                     <textarea id="question" name="enquiryQuestion" required
                         placeholder="Type your question here..." maxlength="300"></textarea>
                 </div>
 
+                <!-- Submit button -->
                 <button type="submit" class="submit-btn" name="enquiryButton">Submit Enquiry</button>
             </form>
         </section>
     </main>
 
     <script>
-        // FAQ Accordion Functionality
+        // JavaScript to toggle FAQ answers (accordion-style behavior)
         document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
                 const answer = question.nextElementSibling;
                 const isActive = question.classList.contains('active');
 
-                // Close all other FAQs
+                // Close all open questions
                 document.querySelectorAll('.faq-question').forEach(q => {
                     q.classList.remove('active');
                     q.nextElementSibling.classList.remove('show');
                 });
 
-                // Open clicked one if it wasn't active
+                // Open the clicked question if it was previously closed
                 if (!isActive) {
                     question.classList.add('active');
                     answer.classList.add('show');
                 }
             });
         });
+
+        // Toast message function triggered on form submission
         const toast = () => {
             Toastify({
                 text: 'Enquiry Submitted. An Administrator will contact you with a response soon',
@@ -163,6 +178,8 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
             }).showToast();
         }
     </script>
+
+    <!-- Toastify JS library for showing toast notifications -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 </body>

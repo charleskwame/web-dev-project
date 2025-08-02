@@ -1,4 +1,5 @@
 :root {
+	/* CSS Variables for consistent theming */
 	--mainblue: #14248a;
 	--secondaryyellow: #e0ca3c;
 	--fontblack: #28262c;
@@ -6,7 +7,7 @@
 	--fontwhite: #f9f5ff;
 }
 
-/* Reset all default HTML styles */
+/* Reset default browser styles for all elements */
 *,
 *::before,
 *::after {
@@ -16,17 +17,20 @@
 	border: 0;
 }
 
+/* Redundant reset, but keeps all margins/padding clear */
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
+/* Ensure the page takes up full height */
 html,
 body {
 	height: 100%;
 }
 
+/* General body styling */
 body {
 	height: 100%;
 	background: var(--backgroundwhite);
@@ -35,19 +39,19 @@ body {
 	color: var(--fontblack);
 }
 
+/* Navigation bar layout */
 nav {
 	display: flex;
 	justify-content: space-between;
-	/* gap: 30px; */
-	/* margin-bottom: 20px; */
 	font-weight: bold;
-	/* padding: 20px; */
 }
 
+/* Logo size inside nav */
 nav > a > img {
 	width: 2rem;
 }
 
+/* Navigation links styling */
 nav a {
 	position: relative;
 	text-decoration: none;
@@ -56,6 +60,7 @@ nav a {
 	padding-bottom: 5px;
 }
 
+/* Hover and active underline effect for nav links */
 nav a::after {
 	content: "";
 	position: absolute;
@@ -72,38 +77,37 @@ nav a.active::after {
 	width: 100%;
 }
 
+/* Main content grid layout */
 main {
 	display: grid;
-	/* grid-template-columns: repeat(2, 1fr); */
 	gap: 30px;
-	/* padding: 20px; */
+	/* padding: 20px; */ /* Optional spacing */
 	margin-top: 30px;
 }
 
-/* Headings with underline */
-
+/* Heading style with underline */
 h2 {
 	border-bottom: 2px solid var(--mainblue);
-	/* padding-bottom: 10px; */
 	margin-bottom: 10px;
 	color: var(--mainblue);
 }
 
+/* Form layout and style */
 form {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
-	/* box-shadow: 0 0 10px var(--fontblack); */
 	background: var(--backgroundwhite);
 	border-radius: 10px;
-	/* padding: 20px; */
 }
 
+/* Labels inside form */
 form > div > label {
 	font-size: small;
 	color: var(--mainblue);
 }
 
+/* Input fields inside form */
 .contact-form > div > input {
 	width: 100%;
 	padding: 10px;
@@ -113,7 +117,7 @@ form > div > label {
 	background-color: var(--backgroundwhite);
 }
 
-/* FAQ Styles */
+/* FAQ Item container styling */
 .faq-item {
 	background-color: var(--mainblue);
 	border: 1px solid var(--mainblue);
@@ -121,9 +125,9 @@ form > div > label {
 	margin-bottom: 15px;
 	box-shadow: 0 2px 5px #ffffff;
 	overflow: hidden;
-	/* border: 2px solid var(--text-light-blue); */
 }
 
+/* FAQ question appearance */
 .faq-question {
 	padding: 15px 20px;
 	cursor: pointer;
@@ -132,10 +136,10 @@ form > div > label {
 	align-items: center;
 	font-weight: bold;
 	transition: background-color 0.3s;
-	/* background-color: #ffffff; */
 	color: var(--fontwhite);
 }
 
+/* Textarea for question input */
 #question {
 	height: 100px;
 	resize: none;
@@ -145,17 +149,18 @@ form > div > label {
 	border-radius: 5px;
 }
 
+/* "+" icon for collapsed FAQ item */
 .faq-question::after {
 	content: "+";
-	/* font-size: 20px; */
-	color: var(--text-light-blue);
-	/* font-weight: bold; */
+	color: var(--text-light-blue); /* Note: this variable isn't defined */
 }
 
+/* "-" icon for expanded FAQ item */
 .faq-question.active::after {
 	content: "-";
 }
 
+/* Hidden answer section styling */
 .faq-answer {
 	padding: 0 10px;
 	max-height: 0;
@@ -165,16 +170,18 @@ form > div > label {
 	font-size: small;
 }
 
+/* When answer is shown */
 .faq-answer.show {
 	padding: 10px;
 	max-height: fit-content;
 }
 
+/* Form input wrapper */
 .form-group {
 	display: grid;
-	/* gap: 5px; */
 }
 
+/* Submit button styling */
 button {
 	background-color: var(--mainblue);
 	color: white;
@@ -186,23 +193,24 @@ button {
 	transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
+/* Button hover effect */
 button:hover {
 	background-color: var(--backgroundwhite);
 	color: var(--mainblue);
 	border: 1px solid var(--mainblue);
 }
 
+/* Responsive styles for larger screens */
 @media (width >= 1024px) {
-	/* laptop only styles go here */
+	/* Adjust logo size on larger screens */
 	nav > a > img {
 		width: 2.5rem;
 	}
 
+	/* Two-column grid layout for main content on desktop */
 	main {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 30px;
-		/* padding: 20px; */
-		/* margin-top: 30px; */
 	}
 }

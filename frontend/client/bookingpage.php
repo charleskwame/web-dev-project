@@ -1,24 +1,30 @@
 <?php
-// checking if database exists and creating it if not found
+// Attempt to connect to MySQL server (without specifying database yet)
 $server = "localhost";
 $user = "root";
 $password = "";
 $database = "nacom_database";
 $connection = mysqli_connect($server, $user, $password);
+
+// SQL query to check if the specified database exists
 $sqlDatabaseCheck = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$database'";
 $result = mysqli_query($connection, $sqlDatabaseCheck);
+
+// If database does not exist, create it
 if ($result && mysqli_num_rows($result) == 0) {
-    // echo "does not exist";
     $sqlCreateDatabase = "CREATE DATABASE IF NOT EXISTS $database";
     mysqli_query($connection, $sqlCreateDatabase);
 }
-// Check if 'bookings' table exists in the newly created database
+
+// Reconnect, this time specifying the newly created or existing database
 $connectionToDatabase = mysqli_connect($server, $user, $password, $database);
+
+// SQL query to check if the 'bookings' table exists
 $sqlTableCheckQuery = "SHOW TABLES LIKE 'bookings'";
 $sqlTableCheckResult = mysqli_query($connectionToDatabase, $sqlTableCheckQuery);
 
+// If the 'bookings' table does not exist, create it
 if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
-    // Table does not exist, create it
     $sqlCreateBookingTable = "CREATE TABLE `bookings` (
         `bookingID` int(3) NOT NULL AUTO_INCREMENT,
         `customerName` varchar(30) NOT NULL,
@@ -36,31 +42,44 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
 <html lang="en">
 
 <head>
+    <!-- Meta tags for character encoding and responsive design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Stylesheet with cache-busting query string -->
     <link rel="stylesheet" href="./bookingpage.css?v=<?php echo date('his'); ?>">
+
+    <!-- Toastify styles for notification popups -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
     <title>Book Consultation</title>
 </head>
 
 <body>
+    <!-- Site header/navigation bar -->
     <div class="header">
         <nav class="nav">
+            <!-- Logo -->
             <a href="../client/index.html">
                 <img src="../assets/images/logo.png" alt="">
             </a>
+
+            <!-- Navigation links -->
             <div>
                 <a href="bookingpage.php" class="active">Book Us</a>
                 <a href="enquiriespage.php">Enquiries</a>
                 <a href="contactuspage.html">Contact Us</a>
             </div>
         </nav>
-
     </div>
+
+    <!-- Main content section -->
     <main>
+        <!-- Section displaying available services -->
         <div class="our-services">
             <h2>Our Services</h2>
             <div class="services">
+                <!-- Each service is represented by an image -->
                 <div class="service">
                     <img src="../assets/images/web development.png" alt="">
                 </div>
@@ -75,10 +94,14 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
                 </div>
             </div>
         </div>
+
+        <!-- Booking form section -->
         <div class="booking">
             <h2>Book a consultation with us</h2>
             <div class="booking-form">
+                <!-- Form to capture user booking data -->
                 <form action="../../backend/client/bookingpage.php" method="post" id="bookingForm" onsubmit="toast()">
+                    <!-- Name input -->
                     <div>
                         <label for="">Enter your name</label>
                         <input type="text" name="customerName" onkeydown="return /[a-zA-Z ]/i.test(event.key)"
@@ -86,12 +109,14 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
                             minlength="3" maxlength="50" required>
                     </div>
 
+                    <!-- Email input -->
                     <div>
                         <label for="">Enter your email</label>
                         <input type="text" name="customerEmail" pattern="[^@]+@[^\.]+\..+" placeholder="aba@gmail.com"
                             minlength="10" maxlength="50" required>
                     </div>
 
+                    <!-- Dropdown for service selection -->
                     <div>
                         <label for="">Choose Service</label>
                         <select name="serviceBooked" id="" required>
@@ -103,18 +128,24 @@ if (!$sqlTableCheckResult || mysqli_num_rows($sqlTableCheckResult) == 0) {
                         </select>
                     </div>
 
+                    <!-- Date selection (restricted to today and future dates) -->
                     <div>
                         <label for="">Book Consultation day</label>
                         <input type="date" name="bookingDate" id="dateInput" min="<?php echo date("Y-m-d"); ?>" required>
                     </div>
 
+                    <!-- Submit button -->
                     <button type="submit" name="bookButton">Submit Appointment</button>
                 </form>
             </div>
         </div>
     </main>
 </body>
+
+<!-- Toastify JavaScript for notification popups -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+<!-- Function to show toast on form submission -->
 <script>
     const toast = () => {
         Toastify({

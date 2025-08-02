@@ -1,4 +1,5 @@
 :root {
+	/* Theme variables for reuse throughout the CSS */
 	--mainblue: #14248a;
 	--secondaryyellow: #e0ca3c;
 	--fontblack: #28262c;
@@ -6,7 +7,7 @@
 	--fontwhite: #f9f5ff;
 }
 
-/* Reset all default HTML styles */
+/* Reset all default HTML element styles */
 *,
 *::before,
 *::after {
@@ -16,11 +17,13 @@
 	border: 0;
 }
 
+/* Ensure full height for HTML and body */
 html,
 body {
 	height: 100%;
 }
 
+/* Base body styling */
 body {
 	height: 100%;
 	background: var(--backgroundwhite);
@@ -29,19 +32,19 @@ body {
 	padding: 10px;
 }
 
+/* Navigation bar layout */
 nav {
 	display: flex;
 	justify-content: space-between;
-	/* gap: 30px; */
-	/* margin-bottom: 20px; */
 	font-weight: bold;
-	/* padding: 20px; */
 }
 
+/* Logo styling inside nav */
 nav > a > img {
 	width: 2rem;
 }
 
+/* Navigation links */
 nav a {
 	position: relative;
 	text-decoration: none;
@@ -50,6 +53,7 @@ nav a {
 	padding-bottom: 5px;
 }
 
+/* Hover and active underline animation for nav links */
 nav a::after {
 	content: "";
 	position: absolute;
@@ -66,31 +70,32 @@ nav a.active::after {
 	width: 100%;
 }
 
+/* Main layout container */
 main {
 	display: grid;
-	/* grid-template-columns: 1fr 1fr; */
 	gap: 20px;
 }
 
+/* Contact section margin */
 .contact-section {
 	margin-top: 20px;
 }
 
-/* Section Headers */
+/* Section headers (e.g., "Our Location", "Contact Us") */
 .box h2 {
 	color: var(--mainblue);
 	margin-bottom: 10px;
 	border-bottom: 2px solid var(--mainblue);
-	/* padding-bottom: 5px; */
-	/* font-size: 1.2em; */
 }
 
+/* Map container styling */
 .map-placeholder {
 	padding: 10px;
 	border: 1px solid var(--mainblue);
 	border-radius: 1rem;
 }
 
+/* Embedded Google Map styling */
 iframe {
 	width: 100%;
 	height: 250px;
@@ -99,7 +104,7 @@ iframe {
 	border-radius: 1rem;
 }
 
-/* Contact Info Box */
+/* Contact info box layout */
 .info {
 	display: grid;
 	gap: 10px;
@@ -109,16 +114,19 @@ iframe {
 	padding: 20px;
 }
 
+/* General paragraph text */
 p {
 	font-size: small;
 }
 
+/* Label styling for contact details */
 label {
 	font-weight: bold;
 	font-size: small;
 	color: var(--mainblue);
 }
 
+/* Styling for contact info fields (e.g., email, phone) */
 .input-box {
 	padding: 10px;
 	border: 1.5px solid var(--mainblue);
@@ -126,22 +134,24 @@ label {
 	background-color: var(--backgroundwhite);
 }
 
-/* Responsive Layout  */
+/* Responsive styles for screens >= 1024px */
 @media (min-width: 1024px) {
+	/* Larger map height on desktop */
 	iframe {
 		width: 100%;
-		height: 70dvh;
+		height: 70dvh; /* Uses dynamic viewport height */
 	}
-	/* laptop only styles go here */
+
+	/* Larger logo for desktop */
 	nav > a > img {
 		width: 2.5rem;
 	}
 
+	/* Two-column layout on larger screens */
 	main {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 30px;
-		/* padding: 20px; */
 		margin-top: 30px;
 	}
 }

@@ -1,4 +1,5 @@
 :root {
+	/* Define CSS variables for consistent color theming */
 	--mainblue: #14248a;
 	--secondaryyellow: #e0ca3c;
 	--fontblack: #28262c;
@@ -6,6 +7,7 @@
 	--fontwhite: #f9f5ff;
 }
 
+/* Apply universal box-sizing and remove default spacing */
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -13,6 +15,7 @@
 	border: 0;
 }
 
+/* Style the overall body */
 body {
 	height: 100%;
 	background: var(--backgroundwhite);
@@ -20,19 +23,20 @@ body {
 	padding: 10px;
 }
 
+/* Navigation bar layout */
 nav {
 	display: flex;
 	justify-content: space-between;
-	/* gap: 30px; */
-	/* margin-bottom: 20px; */
 	font-weight: bold;
-	/* padding: 20px; */
+	/* Optional styling left commented */
 }
 
+/* Style for logo image */
 nav > a > img {
 	width: 2rem;
 }
 
+/* Style for nav links */
 nav a {
 	position: relative;
 	text-decoration: none;
@@ -41,6 +45,7 @@ nav a {
 	padding-bottom: 5px;
 }
 
+/* Animated underline effect for nav links */
 nav a::after {
 	content: "";
 	position: absolute;
@@ -52,63 +57,67 @@ nav a::after {
 	transition: width 0.3s ease;
 }
 
+/* Show full underline on hover or when link is active */
 nav a:hover::after,
 nav a.active::after {
 	width: 100%;
 }
 
+/* Layout for the main section */
 main {
 	display: grid;
-	/* grid-template-columns: repeat(2, 1fr); */
 	gap: 30px;
-	/* padding: 20px; */
 	margin-top: 30px;
+	/* Grid columns defined for larger screens in media query */
 }
 
+/* Shared style for both service and booking sections */
 .our-services,
 .booking {
 	background: var(--backgroundwhite);
 	border-radius: 1rem;
-	/* padding: 20px; */
-	/* box-shadow: 0 0 10px var(--fontblack); */
+	/* Optional box shadow and padding left commented */
 }
 
+/* Section headers */
 .our-services h2,
 .booking h2 {
 	border-bottom: 2px solid var(--mainblue);
-	/* padding-bottom: 10px; */
 	margin-bottom: 10px;
 	color: var(--mainblue);
 }
 
+/* Grid layout for services (2 per row) */
 .services {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 5px;
 }
 
+/* Styling individual service blocks */
 .service {
 	display: grid;
 	gap: 5px;
 	border: 1px solid var(--mainblue);
 	width: fit-content;
-	/* border: 1px solid var(--mainblue); */
-	/* text-align: center; */
 	border-radius: 10px;
 	padding: 5px;
 	transition: transform 0.3s ease;
 }
 
+/* Hover effect to enlarge the service block slightly */
 .service:hover {
 	transform: scale(1.05);
 	background-color: var(--backgroundwhite);
 }
 
+/* Image within each service */
 .service img {
 	width: 100%;
 	border-radius: 8px;
 }
 
+/* Optional service description text */
 .service p {
 	text-decoration: none;
 	color: var(--mainblue);
@@ -116,6 +125,7 @@ main {
 	margin: auto;
 }
 
+/* Booking form layout and appearance */
 .booking form {
 	display: flex;
 	flex-direction: column;
@@ -124,10 +134,12 @@ main {
 	border-radius: 10px;
 }
 
+/* Label styling */
 form > div > label {
 	font-size: small;
 }
 
+/* Shared input and select styling */
 .booking input,
 .booking select {
 	width: 100%;
@@ -138,6 +150,7 @@ form > div > label {
 	background-color: var(--backgroundwhite);
 }
 
+/* Submit button styling */
 .booking button {
 	background-color: var(--mainblue);
 	color: white;
@@ -149,22 +162,26 @@ form > div > label {
 	transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
+/* Button hover effect */
 .booking button:hover {
 	background-color: var(--backgroundwhite);
 	color: var(--mainblue);
 	border: 1px solid var(--mainblue);
 }
 
+/* Label text color */
 label {
 	color: var(--mainblue);
 }
 
+/* Responsive layout for larger screens (laptops and above) */
 @media (width >= 1024px) {
-	/* laptop only styles go here */
+	/* Increase logo size on larger screens */
 	nav > a > img {
 		width: 2.5rem;
 	}
 
+	/* Arrange main content in two columns */
 	main {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
